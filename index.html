@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Priyatam Edits | Creative Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#070708;
+    color:#fff;
+    font-family:Inter,sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:92%;
+    max-width:1180px;
+    margin:auto;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:999;
+    background:rgba(7,7,8,.75);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.navbar{
+    height:74px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-family:"Space Grotesk";
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:#777;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    color:#999;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-btn{
+    background:#fff;
+    color:#000;
+    padding:11px 18px;
+    border-radius:50px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.menu{
+    display:none;
+    background:none;
+    border:0;
+    color:#fff;
+    font-size:25px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    padding:130px 0 80px;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:650px;
+    height:650px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle,
+        rgba(255,255,255,.11),
+        transparent 65%
+    );
+    filter:blur(25px);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.badge{
+    display:inline-block;
+    border:1px solid #29292e;
+    color:#aaa;
+    padding:8px 14px;
+    border-radius:50px;
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-family:"Space Grotesk";
+    font-size:clamp(55px,8vw,110px);
+    line-height:.9;
+    letter-spacing:-7px;
+    max-width:1000px;
+    margin:auto;
+}
+
+.hero h1 span{
+    color:#666;
+}
+
+.hero p{
+    max-width:650px;
+    color:#999;
+    font-size:16px;
+    margin:30px auto;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:13px 21px;
+    border:1px solid #38383d;
+    border-radius:50px;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn.primary{
+    background:#fff;
+    color:#000;
+}
+
+/* ================= SECTION ================= */
+
+section{
+    padding:110px 0;
+}
+
+.small-title{
+    color:#666;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:11px;
+    margin-bottom:12px;
+}
+
+.section-title{
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(40px,5vw,62px);
+    letter-spacing:-3px;
+    line-height:1;
+}
+
+/* ================= SERVICES ================= */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service{
+    min-height:240px;
+    padding:28px;
+    border:1px solid #252529;
+    border-radius:22px;
+    background:linear-gradient(
+        145deg,
+        #131315,
+        #0b0b0d
+    );
+    transition:.35s;
+}
+
+.service:hover{
+    transform:translateY(-8px);
+    border-color:#555;
+}
+
+.icon{
+    width:45px;
+    height:45px;
+    display:grid;
+    place-items:center;
+    border:1px solid #333;
+    border-radius:13px;
+    margin-bottom:25px;
+    font-size:20px;
+}
+
+.service h3{
+    font-family:"Space Grotesk";
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.service p{
+    color:#888;
+    font-size:13px;
+}
+
+/* ================= PORTFOLIO ================= */
+
+.portfolio{
+    display:grid;
+    grid-template-columns:1.4fr .9fr;
+    gap:15px;
+}
+
+.work{
+    min-height:300px;
+    border:1px solid #252529;
+    border-radius:22px;
+    overflow:hidden;
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            #303035,
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #18181b,
+            #080809
+        );
+
+    transition:.4s;
+}
+
+.work:hover{
+    transform:scale(.99);
+    border-color:#555;
+}
+
+.work.large{
+    min-height:620px;
+}
+
+.work::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:linear-gradient(
+        transparent 45%,
+        rgba(0,0,0,.9)
+    );
+}
+
+.work-info{
+    position:absolute;
+    bottom:22px;
+    left:22px;
+    z-index:2;
+}
+
+.work-info small{
+    color:#888;
+    font-size:10px;
+}
+
+.work-info h3{
+    font-family:"Space Grotesk";
+    font-size:24px;
+}
+
+/* ================= PRICING ================= */
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.price-card{
+    padding:32px;
+    border:1px solid #252529;
+    border-radius:23px;
+    background:#0d0d0f;
+}
+
+.price-card.featured{
+    border-color:#777;
+    box-shadow:
+        0 0 60px rgba(255,255,255,.05);
+}
+
+.price-card h3{
+    font-family:"Space Grotesk";
+    font-size:21px;
+}
+
+.price{
+    font-family:"Space Grotesk";
+    font-size:42px;
+    margin:18px 0;
+}
+
+.price span{
+    font-family:Inter;
+    color:#666;
+    font-size:12px;
+}
+
+.features{
+    list-style:none;
+    color:#999;
+    font-size:13px;
+    margin-bottom:28px;
+}
+
+.features li{
+    margin:11px 0;
+}
+
+.features li::before{
+    content:"✓";
+    color:#fff;
+    margin-right:9px;
+}
+
+.price-btn{
+    display:block;
+    text-align:center;
+    padding:12px;
+    border:1px solid #38383d;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.price-btn:hover{
+    background:#fff;
+    color:#000;
+}
+
+/* ================= CONTACT ================= */
+
+.cta{
+    text-align:center;
+    padding:80px 25px;
+    border:1px solid #29292e;
+    border-radius:30px;
+
+    background:radial-gradient(
+        circle,
+        rgba(255,255,255,.08),
+        transparent 60%
+    );
+}
+
+.cta h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(40px,6vw,70px);
+    letter-spacing:-4px;
+    line-height:1;
+}
+
+.cta p{
+    max-width:550px;
+    margin:20px auto 30px;
+    color:#888;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid #222;
+    padding:30px 0;
+    color:#666;
+    font-size:12px;
+}
+
+.footer{
+    display:flex;
+    justify-content:space-between;
+}
+
+/* ================= ANIMATION ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(25px);
+    transition:.8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+    .nav-links,
+    .nav-btn{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .nav-links.active{
+        display:flex;
+        position:absolute;
+        top:74px;
+        left:0;
+        width:100%;
+        padding:20px;
+        flex-direction:column;
+        gap:18px;
+        background:#09090a;
+        border-bottom:1px solid #222;
+    }
+
+    .services{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .portfolio{
+        grid-template-columns:1fr;
+    }
+
+    .work.large{
+        min-height:400px;
+    }
+
+    .pricing{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .hero h1{
+        letter-spacing:-4px;
+    }
+
+    section{
+        padding:75px 0;
+    }
+
+    .services{
+        grid-template-columns:1fr;
+    }
+
+    .footer{
+        flex-direction:column;
+        gap:8px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+<div class="container navbar">
+
+<a href="#" class="logo">
+PRIYATAM <span>EDITS</span>
+</a>
+
+<div class="nav-links" id="navLinks">
+
+<a href="#services">Services</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+<a href="#contact" class="nav-btn">
+Start a Project ↗
+</a>
+
+<button class="menu" id="menu">
+☰
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<header class="hero">
+
+<div class="hero-content reveal">
+
+<div class="badge">
+CREATIVE EDITING STUDIO · AVAILABLE FOR PROJECTS
+</div>
+
+<h1>
+RAW FOOTAGE INTO
+<span>VISUAL STORIES.</span>
+</h1>
+
+<p>
+Premium video editing, photo editing, thumbnails and creative
+design for creators, brands and businesses.
+</p>
+
+<div class="buttons">
+
+<a href="#portfolio" class="btn primary">
+View Our Work ↗
+</a>
+
+<a href="#contact" class="btn">
+Let's Work Together
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="small-title">
+01 — Services
+</div>
+
+<h2>
+Built for impact.
+</h2>
+
+</div>
+
+
+<div class="services">
+
+
+<div class="service reveal">
+
+<div class="icon">
+▶
+</div>
+
+<h3>
+Video Editing
+</h3>
+
+<p>
+Reels, YouTube videos, cinematic edits, advertisements,
+transitions, color grading and sound design.
+</p>
+
+</div>
+
+
+<div class="service reveal">
+
+<div class="icon">
+◈
+</div>
+
+<h3>
+Photo Editing
+</h3>
+
+<p>
+Professional retouching, color correction,
+background removal and creative manipulation.
+</p>
+
+</div>
+
+
+<div class="service reveal">
+
+<div class="icon">
+✦
+</div>
+
+<h3>
+Thumbnail Design
+</h3>
+
+<p>
+High-click thumbnails, posters and social media
+creatives designed to grab attention.
+</p>
+
+</div>
+
+
+<div class="service reveal">
+
+<div class="icon">
+⌁
+</div>
+
+<h3>
+Brand Creatives
+</h3>
+
+<p>
+Creative visual content for products,
+campaigns, launches and personal brands.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PORTFOLIO ================= -->
+
+<section id="portfolio">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="small-title">
+02 — Selected Work
+</div>
+
+<h2>
+Made to be remembered.
+</h2>
+
+</div>
+
+
+<div class="portfolio">
+
+
+<div class="work large reveal">
+
+<div class="work-info">
+
+<small>
+VIDEO · 01
+</small>
+
+<h3>
+Cinematic Story
+</h3>
+
+</div>
+
+</div>
+
+
+<div style="display:grid;gap:15px">
+
+
+<div class="work reveal">
+
+<div class="work-info">
+
+<small>
+PHOTO · 02
+</small>
+
+<h3>
+Creative Retouch
+</h3>
+
+</div>
+
+</div>
+
+
+<div class="work reveal">
+
+<div class="work-info">
+
+<small>
+DESIGN · 03
+</small>
+
+<h3>
+Social Campaign
+</h3>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PRICING ================= -->
+
+<section id="pricing">
+
+<div class="container">
+
+<div class="section-title reveal">
+
+<div class="small-title">
+03 — Pricing
+</div>
+
+<h2>
+Simple packages.
+</h2>
+
+</div>
+
+
+<div class="pricing">
+
+
+<div class="price-card reveal">
+
+<h3>
+Starter
+</h3>
+
+<div class="price">
+₹499 <span>/ project</span>
+</div>
+
+<ul class="features">
+
+<li>Short-form video edit</li>
+<li>Basic color correction</li>
+<li>Clean captions</li>
+<li>2 revisions</li>
+
+</ul>
+
+<a href="#contact" class="price-btn">
+Choose Starter
+</a>
+
+</div>
+
+
+<div class="price-card featured reveal">
+
+<h3>
+Creator
+</h3>
+
+<div class="price">
+₹1,499 <span>/ project</span>
+</div>
+
+<ul class="features">
+
+<li>Premium video editing</li>
+<li>Advanced color grading</li>
+<li>Motion graphics</li>
+<li>Sound design</li>
+<li>3 revisions</li>
+
+</ul>
+
+<a href="#contact" class="price-btn">
+Choose Creator
+</a>
+
+</div>
+
+
+<div class="price-card reveal">
+
+<h3>
+Pro
+</h3>
+
+<div class="price">
+Custom <span>/ quote</span>
+</div>
+
+<ul class="features">
+
+<li>Long-form / commercial</li>
+<li>Advanced motion design</li>
+<li>Brand creative direction</li>
+<li>Priority delivery</li>
+
+</ul>
+
+<a href="#contact" class="price-btn">
+Get a Quote
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="cta reveal">
+
+<div class="small-title">
+04 — Contact
+</div>
+
+<h2>
+Have a project in mind?
+</h2>
+
+<p>
+Tell us what you're creating, your deadline and what you need.
+We'll turn your idea into something people remember.
+</p>
+
+
+<div class="buttons">
+
+
+<!-- APNA WHATSAPP NUMBER YAHAN CHANGE KARNA -->
+
+<a
+href="https://wa.me/6205706883"
+target="_blank"
+class="btn primary"
+>
+WhatsApp Us ↗
+</a>
+
+
+<!-- APNA EMAIL YAHAN CHANGE KARNA -->
+
+<a
+href="mailto:hello@priyatamedits.com"
+class="btn"
+>
+Email Us ↗
+</a>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container footer">
+
+<div>
+© 2026 Priyatam Edits
+</div>
+
+<div>
+Premium Creative Studio
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* MOBILE MENU */
+
+const menu =
+document.getElementById("menu");
+
+const navLinks =
+document.getElementById("navLinks");
+
+menu.addEventListener("click", () => {
+
+navLinks.classList.toggle("active");
+
+});
+
+
+/* SCROLL REVEAL */
+
+const observer =
+new IntersectionObserver(
+
+(entries) => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},
+
+{
+threshold:.12
+}
+
+);
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(element => {
+
+observer.observe(element);
+
+});
+
+</script>
+
+</body>
+</html>
