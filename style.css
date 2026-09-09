@@ -3281,14 +3281,14 @@ button:focus-visible {
 
 .chatbot-btn {
     position: fixed !important;
-    right: 22px;
+    right: 20px;
     bottom: 22px;
 
-    width: 58px;
+    width: 53px;
     height: 58px;
 
     border: none;
-    border-radius: 50%;
+    
 
     background: #ffd21c;
     color: #000;
