@@ -1697,45 +1697,46 @@
     </a>
 <!-- ================= CHATBOT ================= -->
  
-  <button id="chatbotBtn" class="chatbot-btn" type="button" style="width:52px;
-  height:52px;
-  box-sizing:border-box;
-  border:1px solid rgba(70,200,100,.7);
-  background:linear-gradient(145deg,#18221c,#080c09);
-  padding:0;
-  border-radius:15px;
-  color:#5ee17b;
-  font-size:19px;
-  line-height:1;
-  cursor:pointer;
-  transition:all .3s ease;box-shadow:0 7px 20px rgba(0,0,0,.45),0 0 15px rgba(47,141,70,.22);
-  ">💬</button>
+  <!-- CHATBOT BUTTON -->
+<button
+    id="chatbotBtn"
+    class="chatbot-btn"
+    type="button"
+    aria-label="Open chatbot"
+>
+    💬
 </button>
+
+
+<!-- CHATBOT BOX -->
 <div id="chatbotBox" class="chatbot-box">
 
     <!-- HEADER -->
     <div class="chatbot-header">
 
         <div class="chatbot-brand">
-           <div class="chatbot-brand">
 
-    <div class="chatbot-avatar">
-        <img src="sheraya.jpg" alt="Sheraya">
-    </div>
+            <div class="chatbot-avatar">
+                <img src="sheraya.jpg" alt="Sheraya">
+            </div>
 
-    <div>
-        <strong>Sheraya</strong>
+            <div>
+                <strong>Sheraya</strong>
 
-        <small>
-            <span class="online-dot"></span>
-            Priyatam Edits • Online
-        </small>
-    </div>
+                <small>
+                    <span class="online-dot"></span>
+                    Priyatam Edits • Online
+                </small>
+            </div>
 
-</div>
         </div>
 
-        <button id="chatbotClose" class="chatbot-close" type="button">
+        <button
+            id="chatbotClose"
+            class="chatbot-close"
+            type="button"
+            aria-label="Close chatbot"
+        >
             ×
         </button>
 
@@ -1755,6 +1756,7 @@
         <div class="bot-message">
             What would you like to know?
         </div>
+
 
         <!-- QUICK BUTTONS -->
         <div class="chat-options">
@@ -1805,6 +1807,7 @@
     </div>
 
 </div>
+
 
 <script src="script.js"></script>
 
