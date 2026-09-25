@@ -122,6 +122,72 @@
 
 
 <body>
+    <!-- CUSTOM CURSOR -->
+<div class="custom-cursor"></div>
+<div class="cursor-glow"></div>
+    <!-- =========================================================
+     PRIYATAM EDITS — CINEMATIC INTRO
+========================================================= -->
+
+<div class="cinematic-intro" id="cinematicIntro">
+
+    <!-- Ambient effects -->
+    <div class="intro-glow"></div>
+    <div class="intro-particles"></div>
+
+    <!-- Cinematic frame -->
+    <div class="intro-frame intro-frame-top"></div>
+    <div class="intro-frame intro-frame-right"></div>
+    <div class="intro-frame intro-frame-bottom"></div>
+    <div class="intro-frame intro-frame-left"></div>
+
+    <!-- Golden light sweep -->
+    <div class="intro-light-sweep"></div>
+
+    <!-- Main content -->
+    <div class="intro-content">
+
+        <div class="intro-line"></div>
+
+        <div class="intro-brand">
+            PRIYATAM
+        </div>
+
+        <div class="intro-brand-sub">
+            EDITS
+        </div>
+
+        <div class="intro-subtitle">
+            CREATIVE EDITING STUDIO
+        </div>
+
+        <div class="intro-tagline">
+            CUT • COLOR • MOTION • STORY
+        </div>
+
+        <!-- Developer credit -->
+        <div class="intro-developer">
+
+            <span>DESIGNED &amp; DEVELOPED BY</span>
+
+            <strong>
+                AYUSH YADAV
+            </strong>
+
+        </div>
+
+        <!-- Progress -->
+        <div class="intro-progress">
+            <span id="introProgress"></span>
+        </div>
+
+        <div class="intro-percent" id="introPercent">
+            00%
+        </div>
+
+    </div>
+
+</div>
 
 
   <!-- SCROLL PROGRESS -->
@@ -231,17 +297,17 @@
             </div>
 
 
-            <h1>
+          <h1>
+    <span class="hero-line">YOUR FOOTAGE.</span>
+    <br>
 
-                YOUR FOOTAGE.
-                <br>
+    <span class="hero-line">MY EDIT.</span>
+    <br>
 
-                MY EDIT.
-                <br>
-
-                <em>THEIR ATTENTION.</em>
-
-            </h1>
+    <span class="hero-line">
+        <em>THEIR ATTENTION.</em>
+    </span>
+</h1>
 
 
             <p>
@@ -397,6 +463,71 @@
 
 
         </div>
+        <!-- =========================================================
+     BEFORE / AFTER EDITING
+========================================================= -->
+
+<section class="before-after-section">
+
+    <div class="section-head">
+        <span class="eyebrow">EDITING TRANSFORMATION</span>
+
+        <h2>
+            RAW <em>TO</em> FINAL.
+        </h2>
+
+        <p>
+            See the difference professional editing can make.
+        </p>
+    </div>
+
+    <div class="before-after">
+
+        <!-- FINAL / AFTER -->
+        <div class="before-after-image after-image">
+            <img
+                src="after.jpg"
+                alt="Final edited video"
+            >
+        </div>
+
+        <!-- RAW / BEFORE -->
+        <div class="before-after-image before-image">
+            <img
+                src="before.jpg"
+                alt="Raw video"
+            >
+        </div>
+
+        <!-- LABELS -->
+        <div class="before-label">
+            RAW
+        </div>
+
+        <div class="after-label">
+            FINAL
+        </div>
+
+        <!-- SLIDER LINE -->
+        <div class="slider-line">
+            <div class="slider-button">
+                ↔
+            </div>
+        </div>
+
+        <!-- RANGE -->
+        <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            class="before-after-range"
+            aria-label="Before and after comparison"
+        >
+
+    </div>
+
+</section>
     </section>
 
     <!-- SERVICES -->
@@ -610,6 +741,24 @@
                 <em>content.</em>
 
             </h2>
+            <!-- 3D PRICING VISUAL -->
+<div class="pricing-3d-visual">
+    <div class="pricing-3d-glow"></div>
+
+    <img
+        src="pricing-3d.png"
+        alt="3D Video Editor"
+        class="pricing-3d-avatar"
+    >
+
+    <div class="pricing-3d-badge badge-left">
+        ✦ PREMIUM EDITING
+    </div>
+
+    <div class="pricing-3d-badge badge-right">
+        VIDEO · MOTION · COLOR
+    </div>
+</div>
 
 
             <div class="pricing-grid">
@@ -1803,6 +1952,152 @@
         <button id="chatbotSend" type="button">
             ➤
         </button>
+
+    </div>
+
+</div>
+<!-- =========================================================
+     PREMIUM PRICING POPUP
+========================================================= -->
+
+<div class="pricing-modal" id="pricingModal">
+
+    <div class="pricing-modal-backdrop" id="pricingModalBackdrop"></div>
+
+    <div class="pricing-modal-card" id="pricingModalCard">
+
+        <!-- TOP GLOW -->
+        <div class="pricing-modal-glow"></div>
+
+        <!-- CLOSE -->
+        <button
+            class="pricing-modal-close"
+            id="pricingModalClose"
+            type="button"
+            aria-label="Close pricing popup"
+        >
+            ×
+        </button>
+
+        <!-- 3D VISUAL -->
+        <div class="pricing-modal-visual">
+
+            <div class="modal-orbit orbit-one"></div>
+            <div class="modal-orbit orbit-two"></div>
+
+            <div class="modal-3d-light"></div>
+
+            <img
+                src="pricing-3d.png"
+                alt="Priyatam Edits 3D Editor"
+                class="pricing-modal-avatar"
+            >
+
+            <div class="floating-chip chip-one">
+                ✦ PREMIUM
+            </div>
+
+            <div class="floating-chip chip-two">
+                🎬 EDITING
+            </div>
+
+            <div class="floating-chip chip-three">
+                ⚡ FAST DELIVERY
+            </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="pricing-modal-content">
+
+            <div class="modal-eyebrow">
+                <span></span>
+                PRIYATAM EDITS
+            </div>
+
+            <h2 id="modalPackageName">
+                Creator
+            </h2>
+
+            <p class="modal-subtitle" id="modalPackageDescription">
+                Built for creators who want consistent,
+                polished content.
+            </p>
+
+
+            <div class="modal-price">
+
+                <span id="modalPrice">
+                    ₹1,499
+                </span>
+
+                <small id="modalPriceUnit">
+                    / 3 videos
+                </small>
+
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="modal-features" id="modalFeatures">
+
+                <div class="modal-feature">
+                    <span>✓</span>
+                    Advanced editing
+                </div>
+
+                <div class="modal-feature">
+                    <span>✓</span>
+                    Captions + motion
+                </div>
+
+                <div class="modal-feature">
+                    <span>✓</span>
+                    Sound design
+                </div>
+
+                <div class="modal-feature">
+                    <span>✓</span>
+                    Color grading
+                </div>
+
+                <div class="modal-feature">
+                    <span>✓</span>
+                    3 revisions
+                </div>
+
+            </div>
+
+
+            <!-- CTA -->
+
+            <a
+                href="https://wa.me/916205706883"
+                target="_blank"
+                rel="noopener"
+                class="modal-start-btn"
+                id="modalStartBtn"
+            >
+
+                <span>
+                    Let's Start
+                </span>
+
+                <strong>
+                    →
+                </strong>
+
+            </a>
+
+
+            <p class="modal-note">
+                ✦ Discuss your project before placing an order
+            </p>
+
+        </div>
 
     </div>
 

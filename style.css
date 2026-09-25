@@ -4022,3 +4022,2666 @@ button:focus-visible {
     }
 
 }
+/* =========================================================
+   PREMIUM 3D PRICING VISUAL
+========================================================= */
+
+.pricing-3d-visual {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 430px;
+    margin: 40px auto 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    isolation: isolate;
+}
+
+.pricing-3d-glow {
+    position: absolute;
+    width: 420px;
+    height: 280px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 210, 28, 0.28) 0%,
+        rgba(255, 210, 28, 0.12) 35%,
+        transparent 72%
+    );
+    filter: blur(35px);
+    z-index: -1;
+    animation: pricingGlow 4s ease-in-out infinite;
+}
+
+.pricing-3d-avatar {
+    position: relative;
+    width: min(780px, 80vw);
+    max-height: 430px;
+    object-fit: contain;
+    z-index: 2;
+    transform-style: preserve-3d;
+    filter:
+        drop-shadow(0 35px 45px rgba(0, 0, 0, 0.75))
+        drop-shadow(0 0 30px rgba(255, 210, 28, 0.18));
+    animation: pricingFloat 5s ease-in-out infinite;
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.pricing-3d-avatar:hover {
+    filter:
+        drop-shadow(0 45px 55px rgba(0, 0, 0, 0.85))
+        drop-shadow(0 0 45px rgba(255, 210, 28, 0.3));
+}
+
+/* PREMIUM GLASS BADGES */
+
+.pricing-3d-badge {
+    position: absolute;
+    z-index: 4;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background: rgba(15, 17, 16, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    white-space: nowrap;
+}
+
+.badge-left {
+    left: 7%;
+    top: 25%;
+    color: #ffd21c;
+    transform: rotate(-5deg);
+    animation: badgeFloatLeft 4s ease-in-out infinite;
+}
+
+.badge-right {
+    right: 7%;
+    top: 32%;
+    transform: rotate(5deg);
+    animation: badgeFloatRight 4.5s ease-in-out infinite;
+}
+
+/* SOFT FLOOR SHADOW */
+
+.pricing-3d-visual::after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    width: 520px;
+    height: 55px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        ellipse,
+        rgba(0, 0, 0, 0.8),
+        transparent 70%
+    );
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* ANIMATIONS */
+
+@keyframes pricingFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotateX(1deg) rotateY(-1deg);
+    }
+}
+
+@keyframes pricingGlow {
+
+    0%,
+    100% {
+        opacity: 0.65;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+@keyframes badgeFloatLeft {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-3deg);
+    }
+}
+
+@keyframes badgeFloatRight {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(5deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(7deg);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .pricing-3d-visual {
+        height: 270px;
+        margin: 25px auto 45px;
+    }
+
+    .pricing-3d-avatar {
+        width: 105%;
+        max-height: 300px;
+    }
+
+    .pricing-3d-glow {
+        width: 280px;
+        height: 190px;
+    }
+
+    .pricing-3d-badge {
+        font-size: 8px;
+        padding: 9px 11px;
+        letter-spacing: 1px;
+    }
+
+    .badge-left {
+        left: 2%;
+        top: 18%;
+    }
+
+    .badge-right {
+        right: 2%;
+        top: 25%;
+    }
+
+    .pricing-3d-visual::after {
+        width: 280px;
+        height: 35px;
+    }
+}
+/* =========================================================
+   PREMIUM 3D PRICING CARDS
+========================================================= */
+
+.pricing-grid {
+    perspective: 1400px;
+}
+
+.price {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.025)
+        );
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* subtle light reflection */
+
+.price::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -80%;
+    width: 70%;
+    height: 300%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.08),
+        transparent
+    );
+
+    transform: rotate(25deg);
+    transition: 0.7s ease;
+    pointer-events: none;
+}
+
+.price:hover::before {
+    left: 130%;
+}
+
+/* card hover */
+
+.price:hover {
+    transform:
+        translateY(-12px)
+        rotateX(2deg);
+
+    border-color: rgba(255,210,28,0.35);
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,0.65),
+        0 0 35px rgba(255,210,28,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* =========================================================
+   FEATURED CREATOR CARD
+========================================================= */
+
+.price.featured {
+    border-color: rgba(255,210,28,0.45);
+
+    box-shadow:
+        0 30px 75px rgba(0,0,0,0.6),
+        0 0 45px rgba(255,210,28,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.price.featured:hover {
+    transform:
+        translateY(-16px)
+        rotateX(2deg)
+        scale(1.015);
+
+    border-color: rgba(255,210,28,0.75);
+
+    box-shadow:
+        0 40px 90px rgba(0,0,0,0.7),
+        0 0 55px rgba(255,210,28,0.16);
+}
+
+/* Popular badge */
+
+.price.featured .badge {
+    box-shadow:
+        0 0 20px rgba(255,210,28,0.25);
+}
+
+/* =========================================================
+   3D DEPTH
+========================================================= */
+
+.price .label,
+.price .amount,
+.price .desc,
+.price .features,
+.price .btn {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(20px);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .price:hover,
+    .price.featured:hover {
+        transform: translateY(-6px);
+    }
+
+    .price .label,
+    .price .amount,
+    .price .desc,
+    .price .features,
+    .price .btn {
+        transform: none;
+    }
+}
+/* =========================================================
+   PRIYATAM EDITS — PREMIUM 3D PRICING POPUP
+========================================================= */
+
+.pricing-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.pricing-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   BACKDROP
+========================================================= */
+
+.pricing-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,210,28,.08),
+            transparent 35%
+        ),
+        rgba(2,3,3,.84);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.pricing-modal-card {
+    position: relative;
+
+    width: min(920px, calc(100vw - 32px));
+    min-height: 570px;
+
+    display: grid;
+    grid-template-columns: 46% 54%;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(28,31,29,.96),
+            rgba(8,10,9,.98)
+        );
+
+    box-shadow:
+        0 50px 120px rgba(0,0,0,.85),
+        0 0 80px rgba(255,210,28,.07),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transform:
+        perspective(1400px)
+        translateY(35px)
+        rotateX(4deg)
+        scale(.94);
+
+    transition:
+        transform .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.pricing-modal.active .pricing-modal-card {
+    transform:
+        perspective(1400px)
+        translateY(0)
+        rotateX(0deg)
+        scale(1);
+}
+
+
+/* =========================================================
+   TOP GOLDEN GLOW
+========================================================= */
+
+.pricing-modal-glow {
+    position: absolute;
+
+    top: -180px;
+    left: 50%;
+
+    width: 500px;
+    height: 350px;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,210,28,.22),
+            transparent 68%
+        );
+
+    filter: blur(30px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.pricing-modal-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.055);
+    color: rgba(255,255,255,.75);
+
+    font-size: 27px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease;
+}
+
+.pricing-modal-close:hover {
+    transform: rotate(90deg) scale(1.08);
+
+    background: rgba(255,210,28,.12);
+    color: #ffd21c;
+}
+
+
+/* =========================================================
+   3D VISUAL AREA
+========================================================= */
+
+.pricing-modal-visual {
+    position: relative;
+
+    min-height: 570px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    perspective: 1000px;
+
+    border-right: 1px solid rgba(255,255,255,.07);
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,210,28,.08),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   3D AVATAR
+========================================================= */
+
+.pricing-modal-avatar {
+    position: relative;
+
+    width: 115%;
+    max-width: 560px;
+
+    z-index: 5;
+
+    object-fit: contain;
+
+    transform-style: preserve-3d;
+
+    filter:
+        drop-shadow(0 35px 35px rgba(0,0,0,.75))
+        drop-shadow(0 0 35px rgba(255,210,28,.14));
+
+    animation:
+        modalAvatarFloat 5s ease-in-out infinite;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
+}
+
+
+/* =========================================================
+   ORBIT RINGS
+========================================================= */
+
+.modal-orbit {
+    position: absolute;
+
+    border: 1px solid rgba(255,210,28,.22);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transform-style: preserve-3d;
+}
+
+.orbit-one {
+    width: 390px;
+    height: 150px;
+
+    transform:
+        rotateX(66deg)
+        rotateZ(-18deg);
+
+    animation:
+        orbitSpin 12s linear infinite;
+}
+
+.orbit-two {
+    width: 470px;
+    height: 190px;
+
+    transform:
+        rotateX(66deg)
+        rotateZ(38deg);
+
+    border-color: rgba(255,255,255,.08);
+
+    animation:
+        orbitSpinReverse 17s linear infinite;
+}
+
+
+/* =========================================================
+   ORBIT LIGHT
+========================================================= */
+
+.modal-3d-light {
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #ffd21c;
+
+    box-shadow:
+        0 0 12px #ffd21c,
+        0 0 35px rgba(255,210,28,.8);
+
+    animation:
+        lightOrbit 6s linear infinite;
+}
+
+
+/* =========================================================
+   FLOATING CHIPS
+========================================================= */
+
+.floating-chip {
+    position: absolute;
+
+    z-index: 10;
+
+    padding: 10px 14px;
+
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 12px;
+
+    background: rgba(15,17,16,.68);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: #fff;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    white-space: nowrap;
+}
+
+.chip-one {
+    top: 20%;
+    left: 7%;
+
+    color: #ffd21c;
+
+    transform: rotate(-6deg);
+
+    animation:
+        chipFloatOne 4s ease-in-out infinite;
+}
+
+.chip-two {
+    right: 7%;
+    top: 34%;
+
+    transform: rotate(5deg);
+
+    animation:
+        chipFloatTwo 4.5s ease-in-out infinite;
+}
+
+.chip-three {
+    bottom: 17%;
+    left: 13%;
+
+    transform: rotate(4deg);
+
+    animation:
+        chipFloatThree 5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.pricing-modal-content {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 55px 52px 45px;
+
+    z-index: 5;
+}
+
+
+/* eyebrow */
+
+.modal-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 16px;
+
+    color: #999;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+}
+
+.modal-eyebrow span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ffd21c;
+
+    box-shadow:
+        0 0 12px rgba(255,210,28,.8);
+}
+
+
+/* heading */
+
+.pricing-modal-content h2 {
+    margin: 0;
+
+    color: #fff;
+
+    font-family: Georgia, serif;
+
+    font-size: clamp(42px, 5vw, 64px);
+
+    line-height: .95;
+
+    letter-spacing: -2px;
+}
+
+.modal-subtitle {
+    max-width: 390px;
+
+    margin: 18px 0 24px;
+
+    color: #999;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.modal-price {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+
+    margin-bottom: 28px;
+}
+
+.modal-price span {
+    color: #ffd21c;
+
+    font-size: 43px;
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    text-shadow:
+        0 0 25px rgba(255,210,28,.18);
+}
+
+.modal-price small {
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.modal-features {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+.modal-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 11px;
+
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.025);
+
+    color: #ccc;
+
+    font-size: 10px;
+}
+
+.modal-feature span {
+    color: #ffd21c;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.modal-start-btn {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 16px 19px;
+
+    border: 1px solid rgba(255,210,28,.35);
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd21c,
+            #f2bd00
+        );
+
+    color: #090909;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    box-shadow:
+        0 15px 35px rgba(255,210,28,.16);
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.modal-start-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.55),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: .7s ease;
+}
+
+.modal-start-btn:hover::before {
+    left: 140%;
+}
+
+.modal-start-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 20px 45px rgba(255,210,28,.25);
+}
+
+.modal-start-btn strong {
+    font-size: 20px;
+}
+
+
+/* note */
+
+.modal-note {
+    margin: 13px 0 0;
+
+    color: #666;
+
+    font-size: 9px;
+
+    text-align: center;
+
+    letter-spacing: .4px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes modalAvatarFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotateY(-2deg);
+    }
+}
+
+@keyframes orbitSpin {
+
+    from {
+        transform:
+            rotateX(66deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            rotateX(66deg)
+            rotateZ(360deg);
+    }
+}
+
+@keyframes orbitSpinReverse {
+
+    from {
+        transform:
+            rotateX(66deg)
+            rotateZ(360deg);
+    }
+
+    to {
+        transform:
+            rotateX(66deg)
+            rotateZ(0deg);
+    }
+}
+
+@keyframes lightOrbit {
+
+    from {
+        transform:
+            translateX(-170px)
+            translateY(-45px);
+    }
+
+    25% {
+        transform:
+            translateX(150px)
+            translateY(-60px);
+    }
+
+    50% {
+        transform:
+            translateX(180px)
+            translateY(50px);
+    }
+
+    75% {
+        transform:
+            translateX(-130px)
+            translateY(65px);
+    }
+
+    100% {
+        transform:
+            translateX(-170px)
+            translateY(-45px);
+    }
+}
+
+@keyframes chipFloatOne {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-6deg);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(-3deg);
+    }
+}
+
+@keyframes chipFloatTwo {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(5deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(8deg);
+    }
+}
+
+@keyframes chipFloatThree {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(4deg);
+    }
+
+    50% {
+        transform:
+            translateY(-9px)
+            rotate(1deg);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .pricing-modal {
+        padding: 15px;
+    }
+
+    .pricing-modal-card {
+        width: 100%;
+        max-height: 92vh;
+        overflow-y: auto;
+
+        display: block;
+
+        border-radius: 24px;
+
+        transform:
+            translateY(30px)
+            scale(.95);
+    }
+
+    .pricing-modal.active .pricing-modal-card {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    .pricing-modal-visual {
+        min-height: 280px;
+
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .pricing-modal-avatar {
+        width: 105%;
+        max-height: 310px;
+    }
+
+    .orbit-one {
+        width: 270px;
+        height: 110px;
+    }
+
+    .orbit-two {
+        width: 320px;
+        height: 135px;
+    }
+
+    .chip-one {
+        left: 4%;
+        top: 18%;
+    }
+
+    .chip-two {
+        right: 4%;
+        top: 30%;
+    }
+
+    .chip-three {
+        bottom: 10%;
+        left: 6%;
+    }
+
+    .pricing-modal-content {
+        padding: 30px 24px 28px;
+    }
+
+    .pricing-modal-content h2 {
+        font-size: 43px;
+    }
+
+    .modal-price span {
+        font-size: 36px;
+    }
+
+    .modal-features {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-modal-close {
+        top: 12px;
+        right: 12px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pricing-modal *,
+    .pricing-modal *::before,
+    .pricing-modal *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+/* =========================================================
+   PRICING POPUP — CINEMATIC STAGGER
+========================================================= */
+
+.pricing-modal-content > * {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.pricing-modal.active .modal-eyebrow {
+    animation: pricingReveal .6s .15s ease forwards;
+}
+
+.pricing-modal.active h2 {
+    animation: pricingReveal .7s .22s ease forwards;
+}
+
+.pricing-modal.active .modal-subtitle {
+    animation: pricingReveal .7s .30s ease forwards;
+}
+
+.pricing-modal.active .modal-price {
+    animation: pricingReveal .7s .38s ease forwards;
+}
+
+.pricing-modal.active .modal-features {
+    animation: pricingReveal .7s .46s ease forwards;
+}
+
+.pricing-modal.active .modal-start-btn {
+    animation: pricingReveal .7s .54s ease forwards;
+}
+
+.pricing-modal.active .modal-note {
+    animation: pricingReveal .7s .62s ease forwards;
+}
+
+@keyframes pricingReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(18px)
+            scale(.98);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+        filter: blur(0);
+    }
+}
+
+
+/* Feature items slight stagger */
+
+.pricing-modal.active .modal-feature:nth-child(1) {
+    animation: featureReveal .5s .50s ease both;
+}
+
+.pricing-modal.active .modal-feature:nth-child(2) {
+    animation: featureReveal .5s .56s ease both;
+}
+
+.pricing-modal.active .modal-feature:nth-child(3) {
+    animation: featureReveal .5s .62s ease both;
+}
+
+.pricing-modal.active .modal-feature:nth-child(4) {
+    animation: featureReveal .5s .68s ease both;
+}
+
+.pricing-modal.active .modal-feature:nth-child(5) {
+    animation: featureReveal .5s .74s ease both;
+}
+
+@keyframes featureReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateX(12px)
+            scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+/* =========================================================
+   PRICING POPUP — FINAL RESPONSIVE POLISH
+========================================================= */
+
+/* Smooth scrolling inside popup */
+.pricing-modal-card {
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+}
+
+
+/* Desktop hover depth */
+@media (min-width: 1000px) {
+
+    .pricing-modal-card {
+        transform-style: preserve-3d;
+    }
+
+    .pricing-modal-content {
+        transform: translateZ(20px);
+    }
+
+    .pricing-modal-visual {
+        transform-style: preserve-3d;
+    }
+
+}
+
+
+/* Tablet */
+@media (max-width: 900px) and (min-width: 761px) {
+
+    .pricing-modal-card {
+        width: min(760px, calc(100vw - 30px));
+        min-height: 500px;
+    }
+
+    .pricing-modal-visual {
+        min-height: 500px;
+    }
+
+    .pricing-modal-content {
+        padding: 40px 32px;
+    }
+
+    .pricing-modal-content h2 {
+        font-size: 48px;
+    }
+
+    .modal-price span {
+        font-size: 36px;
+    }
+
+}
+
+
+/* Mobile */
+@media (max-width: 760px) {
+
+    .pricing-modal {
+        padding: 10px;
+    }
+
+    .pricing-modal-card {
+        width: 100%;
+        max-width: 520px;
+        max-height: calc(100vh - 20px);
+
+        border-radius: 22px;
+    }
+
+    .pricing-modal-visual {
+        min-height: 250px;
+        height: 250px;
+    }
+
+    .pricing-modal-avatar {
+        width: 100%;
+        max-width: 360px;
+        max-height: 250px;
+    }
+
+    .pricing-modal-content {
+        padding: 26px 20px 22px;
+    }
+
+    .modal-eyebrow {
+        margin-bottom: 12px;
+        font-size: 8px;
+    }
+
+    .pricing-modal-content h2 {
+        font-size: 39px;
+        letter-spacing: -1.5px;
+    }
+
+    .modal-subtitle {
+        margin: 14px 0 20px;
+        font-size: 12px;
+    }
+
+    .modal-price {
+        margin-bottom: 20px;
+    }
+
+    .modal-price span {
+        font-size: 34px;
+    }
+
+    .modal-features {
+        gap: 7px;
+        margin-bottom: 22px;
+    }
+
+    .modal-feature {
+        padding: 9px 10px;
+        font-size: 9px;
+    }
+
+    .modal-start-btn {
+        padding: 14px 16px;
+    }
+
+    .modal-note {
+        font-size: 8px;
+    }
+
+    .pricing-modal-close {
+        width: 38px;
+        height: 38px;
+        font-size: 23px;
+    }
+
+    .floating-chip {
+        padding: 7px 9px;
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .chip-one {
+        left: 3%;
+    }
+
+    .chip-two {
+        right: 3%;
+    }
+
+    .chip-three {
+        left: 5%;
+    }
+
+}
+
+
+/* Small phones */
+@media (max-width: 380px) {
+
+    .pricing-modal-content {
+        padding: 23px 16px 19px;
+    }
+
+    .pricing-modal-content h2 {
+        font-size: 34px;
+    }
+
+    .modal-price span {
+        font-size: 30px;
+    }
+
+    .pricing-modal-visual {
+        min-height: 220px;
+        height: 220px;
+    }
+
+    .pricing-modal-avatar {
+        max-height: 220px;
+    }
+
+    .modal-feature {
+        font-size: 8.5px;
+    }
+
+}
+
+
+/* Prevent accidental horizontal overflow */
+html,
+body {
+    overflow-x: hidden;
+}
+
+
+/* Better touch interaction */
+.modal-start-btn,
+.pricing-modal-close {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+
+/* Safe-area support for modern phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+
+    .pricing-modal-content {
+        padding-bottom:
+            calc(22px + env(safe-area-inset-bottom));
+    }
+
+}
+/* =========================================================
+   PRIYATAM EDITS — PREMIUM CINEMATIC INTRO
+========================================================= */
+
+.cinematic-intro {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,210,28,.045),
+            transparent 38%
+        ),
+        #020202;
+
+    overflow: hidden;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 1s cubic-bezier(.77,0,.18,1),
+        visibility 1s;
+}
+
+.cinematic-intro.intro-finished {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   AMBIENT GLOW
+========================================================= */
+
+.intro-glow {
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,210,28,.12),
+            rgba(255,210,28,.025) 35%,
+            transparent 70%
+        );
+
+    filter: blur(35px);
+
+    animation:
+        introGlow 4s ease-in-out infinite alternate;
+}
+
+
+/* =========================================================
+   LIGHT SWEEP
+========================================================= */
+
+.intro-light-sweep {
+    position: absolute;
+
+    top: -20%;
+    left: -30%;
+
+    width: 18%;
+    height: 140%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,210,28,.12),
+            rgba(255,255,255,.22),
+            rgba(255,210,28,.08),
+            transparent
+        );
+
+    filter: blur(10px);
+
+    transform:
+        rotate(12deg)
+        translateX(-100vw);
+
+    animation:
+        introLightSweep 2.7s 1s cubic-bezier(.65,0,.35,1)
+        forwards;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CINEMATIC FRAME
+========================================================= */
+
+.intro-frame {
+    position: absolute;
+
+    background: rgba(255,210,28,.55);
+
+    box-shadow:
+        0 0 12px rgba(255,210,28,.35);
+}
+
+.intro-frame-top {
+    top: 7%;
+    left: 7%;
+
+    width: 0;
+    height: 1px;
+
+    animation:
+        frameHorizontal 1.2s .25s ease forwards;
+}
+
+.intro-frame-bottom {
+    bottom: 7%;
+    right: 7%;
+
+    width: 0;
+    height: 1px;
+
+    animation:
+        frameHorizontalReverse 1.2s .35s ease forwards;
+}
+
+.intro-frame-left {
+    left: 7%;
+    bottom: 7%;
+
+    width: 1px;
+    height: 0;
+
+    animation:
+        frameVertical 1.2s .45s ease forwards;
+}
+
+.intro-frame-right {
+    right: 7%;
+    top: 7%;
+
+    width: 1px;
+    height: 0;
+
+    animation:
+        frameVerticalReverse 1.2s .55s ease forwards;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.intro-content {
+    position: relative;
+
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* Golden line */
+
+.intro-line {
+    width: 0;
+    height: 1px;
+
+    margin-bottom: 25px;
+
+    background: #ffd21c;
+
+    box-shadow:
+        0 0 18px rgba(255,210,28,.9);
+
+    animation:
+        introLine 1s .15s cubic-bezier(.77,0,.18,1)
+        forwards;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.intro-brand {
+    color: #fff;
+
+    font-family: Georgia, serif;
+
+    font-size: clamp(48px, 9vw, 105px);
+
+    font-weight: 500;
+
+    line-height: .8;
+
+    letter-spacing: .28em;
+
+    opacity: 0;
+
+    transform:
+        translateY(25px)
+        scale(.92);
+
+    animation:
+        introBrand 1.1s .55s cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+
+/* EDITS */
+
+.intro-brand-sub {
+    margin-top: 15px;
+
+    color: #ffd21c;
+
+    font-size: clamp(15px, 2vw, 23px);
+
+    font-weight: 800;
+
+    letter-spacing: 10px;
+
+    padding-left: 10px;
+
+    opacity: 0;
+
+    transform:
+        translateY(12px);
+
+    animation:
+        introSub  .8s 1.15s ease forwards;
+}
+
+
+/* =========================================================
+   STUDIO TEXT
+========================================================= */
+
+.intro-subtitle {
+    margin-top: 22px;
+
+    color: rgba(255,255,255,.62);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    opacity: 0;
+
+    animation:
+        introFade .8s 1.45s ease forwards;
+}
+
+
+/* =========================================================
+   TAGLINE
+========================================================= */
+
+.intro-tagline {
+    margin-top: 50px;
+
+    color: rgba(255,255,255,.38);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    opacity: 0;
+
+    animation:
+        introFade .8s 1.7s ease forwards;
+}
+
+
+/* =========================================================
+   DEVELOPER CREDIT
+========================================================= */
+
+.intro-developer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 35px;
+
+    opacity: 0;
+
+    animation:
+        developerReveal .9s 1.9s ease forwards;
+}
+
+.intro-developer span {
+    color: rgba(255,255,255,.28);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+}
+
+.intro-developer strong {
+    color: rgba(255,255,255,.72);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.intro-progress {
+    width: 170px;
+    height: 1px;
+
+    margin-top: 22px;
+
+    background: rgba(255,255,255,.09);
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    animation:
+        progressShow .5s 1.9s ease forwards;
+}
+
+.intro-progress span {
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    background: #ffd21c;
+
+    box-shadow:
+        0 0 12px rgba(255,210,28,.9);
+
+    animation:
+        progressFill 2.4s 2s cubic-bezier(.65,0,.35,1)
+        forwards;
+}
+
+
+/* Percentage */
+
+.intro-percent {
+    margin-top: 9px;
+
+    color: rgba(255,255,255,.3);
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+    opacity: 0;
+
+    animation:
+        progressShow .5s 2s ease forwards;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes introGlow {
+
+    from {
+        transform: scale(.82);
+        opacity: .45;
+    }
+
+    to {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+}
+
+@keyframes introLightSweep {
+
+    0% {
+        transform:
+            rotate(12deg)
+            translateX(-100vw);
+    }
+
+    100% {
+        transform:
+            rotate(12deg)
+            translateX(750vw);
+    }
+}
+
+@keyframes introLine {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 110px;
+    }
+}
+
+@keyframes introBrand {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(.92);
+
+        letter-spacing: .28em;
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        letter-spacing: .12em;
+    }
+}
+
+@keyframes introSub {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes introFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes developerReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(12px)
+            scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes progressShow {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes progressFill {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes frameHorizontal {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 86%;
+    }
+}
+
+@keyframes frameHorizontalReverse {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 86%;
+    }
+}
+
+@keyframes frameVertical {
+
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 86%;
+    }
+}
+
+@keyframes frameVerticalReverse {
+
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 86%;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .intro-brand {
+        font-size: 48px;
+        letter-spacing: .12em;
+    }
+
+    .intro-brand-sub {
+        font-size: 14px;
+        letter-spacing: 7px;
+    }
+
+    .intro-subtitle {
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+
+    .intro-tagline {
+        margin-top: 42px;
+
+        font-size: 7px;
+        letter-spacing: 2.5px;
+    }
+
+    .intro-developer {
+        margin-top: 30px;
+    }
+
+    .intro-developer span {
+        font-size: 6px;
+    }
+
+    .intro-developer strong {
+        font-size: 8px;
+    }
+
+    .intro-progress {
+        width: 130px;
+    }
+
+    .intro-frame-top,
+    .intro-frame-bottom {
+        width: 0;
+    }
+
+}
+/* =========================================================
+   CINEMATIC INTRO → HERO TRANSITION
+========================================================= */
+
+.cinematic-intro {
+    transform: scale(1);
+    filter: blur(0);
+    transition:
+        opacity 1s cubic-bezier(.77,0,.18,1),
+        transform 1.15s cubic-bezier(.77,0,.18,1),
+        filter 1.15s ease,
+        visibility 1.15s;
+}
+
+.cinematic-intro.intro-finished {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: scale(1.12);
+    filter: blur(12px);
+}
+
+
+/* Hero starts slightly hidden */
+
+.hero {
+    opacity: 0;
+    transform: scale(1.025);
+
+    animation:
+        heroReveal 1.4s 4.15s cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+@keyframes heroReveal {
+
+    from {
+        opacity: 0;
+        transform: scale(1.025);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Hero content comes slightly later */
+
+.hero-content {
+    opacity: 0;
+    transform: translateY(25px);
+
+    animation:
+        heroContentReveal 1s 4.45s cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+@keyframes heroContentReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* =========================================================
+   HERO — CINEMATIC LINE REVEAL
+========================================================= */
+
+.hero-content h1 {
+    perspective: 900px;
+}
+
+.hero-content h1 .hero-line {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform:
+        translateY(70px)
+        rotateX(45deg);
+
+    transform-origin: center bottom;
+
+    animation:
+        heroLineReveal .9s cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.hero-content h1 .hero-line:nth-of-type(1) {
+    animation-delay: 4.55s;
+}
+
+.hero-content h1 .hero-line:nth-of-type(2) {
+    animation-delay: 4.75s;
+}
+
+.hero-content h1 .hero-line:nth-of-type(3) {
+    animation-delay: 4.95s;
+}
+
+@keyframes heroLineReveal {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(70px)
+            rotateX(45deg);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            rotateX(0);
+    }
+}
+/* =========================================================
+   PREMIUM CUSTOM CURSOR
+========================================================= */
+
+.custom-cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999999;
+    transform: translate(-50%, -50%);
+    transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+    mix-blend-mode: difference;
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    border: 1px solid rgba(255, 190, 70, .45);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999998;
+    transform: translate(-50%, -50%);
+    transition:
+        width .3s ease,
+        height .3s ease,
+        border-color .3s ease,
+        background .3s ease;
+    box-shadow:
+        0 0 20px rgba(255, 190, 70, .12),
+        inset 0 0 15px rgba(255, 190, 70, .05);
+}
+
+body.cursor-hover .custom-cursor {
+    width: 5px;
+    height: 5px;
+}
+
+body.cursor-hover .cursor-glow {
+    width: 70px;
+    height: 70px;
+    border-color: rgba(255, 190, 70, .8);
+    background: rgba(255, 190, 70, .04);
+}
+
+/* Hide on touch/mobile devices */
+
+@media (max-width: 768px) {
+    .custom-cursor,
+    .cursor-glow {
+        display: none;
+    }
+}
+
+/* =========================================================
+   PORTFOLIO 3D HOVER
+========================================================= */
+
+.portfolio-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition:
+        transform .35s cubic-bezier(.16,1,.3,1),
+        box-shadow .35s ease;
+}
+
+.portfolio-card:hover {
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, .45),
+        0 0 35px rgba(255, 190, 70, .08);
+}
+
+.portfolio-card img,
+.portfolio-card video {
+    transform: translateZ(15px);
+}
+
+@media (max-width: 768px) {
+    .portfolio-card {
+        transform: none !important;
+    }
+
+    .portfolio-card:hover {
+        transform: none !important;
+    }
+}
+/* =========================================================
+   BEFORE / AFTER SLIDER
+========================================================= */
+
+.before-after-section {
+    padding: 120px 5%;
+}
+
+.before-after-section .section-head {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.before-after-section .section-head h2 {
+    font-size: clamp(40px, 6vw, 80px);
+    margin: 12px 0;
+}
+
+.before-after-section .section-head p {
+    opacity: .65;
+}
+
+/* MAIN SLIDER */
+
+.before-after {
+    position: relative;
+    width: min(1100px, 100%);
+    height: 600px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #111;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+}
+
+/* IMAGES */
+
+.before-after-image {
+    position: absolute;
+    inset: 0;
+}
+
+.before-after-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.after-image {
+    z-index: 1;
+}
+
+.before-image {
+    z-index: 2;
+    width: 50%;
+    overflow: hidden;
+}
+
+.before-image img {
+    width: 1100px;
+    max-width: none;
+}
+
+/* LABELS */
+
+.before-label,
+.after-label {
+    position: absolute;
+    top: 25px;
+    z-index: 6;
+
+    padding: 8px 15px;
+
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 30px;
+
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(10px);
+
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.before-label {
+    left: 25px;
+}
+
+.after-label {
+    right: 25px;
+}
+
+/* SLIDER LINE */
+
+.slider-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+
+    width: 2px;
+
+    z-index: 5;
+
+    background: #fff;
+
+    transform: translateX(-50%);
+
+    pointer-events: none;
+}
+
+/* SLIDER BUTTON */
+
+.slider-button {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 56px;
+    height: 56px;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff;
+    color: #111;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.25),
+        0 10px 30px rgba(0,0,0,.35);
+}
+
+/* RANGE CONTROL */
+
+.before-after-range {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    cursor: ew-resize;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .before-after-section {
+        padding: 80px 5%;
+    }
+
+    .before-after {
+        height: 420px;
+        border-radius: 18px;
+    }
+
+    .before-image img {
+        width: 100%;
+    }
+
+    .slider-button {
+        width: 46px;
+        height: 46px;
+        font-size: 18px;
+    }
+
+    .before-label,
+    .after-label {
+        top: 15px;
+        font-size: 9px;
+        padding: 7px 11px;
+    }
+
+    .before-label {
+        left: 15px;
+    }
+
+    .after-label {
+        right: 15px;
+    }
+}
+/* =========================================================
+   SCROLL REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition:
+        opacity .9s ease,
+        transform .9s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Small delay variations */
+
+.reveal-delay-1 {
+    transition-delay: .1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: .2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: .3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+}
+/* =========================================================
+   PREMIUM MICRO INTERACTIONS
+========================================================= */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255,255,255,.22),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+    transition: left .7s ease;
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 150%;
+}
+
+/* Portfolio image zoom */
+
+.portfolio-card {
+    overflow: hidden;
+}
+
+.portfolio-card img,
+.portfolio-card video {
+    transition: transform .7s cubic-bezier(.16,1,.3,1);
+}
+
+.portfolio-card:hover img,
+.portfolio-card:hover video {
+    transform: translateZ(15px) scale(1.035);
+}
+
+/* Pricing card shine */
+
+.price {
+    position: relative;
+    overflow: hidden;
+}
+
+.price::before {
+    content: "";
+    position: absolute;
+
+    top: -120%;
+    left: -40%;
+
+    width: 50%;
+    height: 300%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.07),
+        transparent
+    );
+
+    transform: rotate(25deg);
+    transition: left .9s ease;
+
+    pointer-events: none;
+}
+
+.price:hover::before {
+    left: 130%;
+}
+
+/* Mobile: keep interactions lightweight */
+
+@media (max-width: 768px) {
+
+    .portfolio-card:hover img,
+    .portfolio-card:hover video {
+        transform: none;
+    }
+
+    .btn::before,
+    .price::before {
+        display: none;
+    }
+
+}

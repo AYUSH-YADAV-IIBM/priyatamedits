@@ -67,31 +67,82 @@ if (soundBtn && heroVideo) {
    MOBILE MENU
 ========================================================= */
 
+/* =========================================================
+   MOBILE MENU — FINAL
+========================================================= */
+
 const menuBtn = document.getElementById("menu");
 const mobileMenu = document.getElementById("mobile");
 
 if (menuBtn && mobileMenu) {
 
-    menuBtn.addEventListener("click", () => {
+    function openMobileMenu() {
+        mobileMenu.classList.add("open");
+    }
 
-        mobileMenu.classList.toggle("active");
-        menuBtn.classList.toggle("active");
+    function closeMobileMenu() {
+        mobileMenu.classList.remove("open");
+    }
+
+    menuBtn.addEventListener("click", function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (mobileMenu.classList.contains("open")) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
 
     });
 
-    mobileMenu.querySelectorAll("a").forEach(link => {
 
-        link.addEventListener("click", () => {
+    /* Menu links */
 
-            mobileMenu.classList.remove("active");
-            menuBtn.classList.remove("active");
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            closeMobileMenu();
 
         });
 
     });
 
+
+    /* Click outside */
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            !mobileMenu.contains(event.target) &&
+            !menuBtn.contains(event.target)
+        ) {
+
+            closeMobileMenu();
+
+        }
+
+    });
+
+
+    /* ESC */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+
+            closeMobileMenu();
+
+        }
+
+    });
+
 }
 
+
+    
 
 /* =========================================================
    PORTFOLIO DATA
@@ -630,7 +681,7 @@ updateStars();
 
 
 /* =========================================================
-   GET FEEDBACK
+   GET FEEDBACK user
 ========================================================= */
 
 function getFeedback() {
@@ -651,7 +702,7 @@ function getFeedback() {
 
 
 /* =========================================================
-   SAVE FEEDBACK
+   FEEDBACK SAVE!
 ========================================================= */
 
 function saveFeedback(data) {
@@ -1801,3 +1852,955 @@ document.addEventListener(
 
     }
 );
+/* =========================================================
+   PRICING 3D MOUSE TILT
+========================================================= */
+
+const pricingVisual = document.querySelector(".pricing-3d-visual");
+const pricingAvatar = document.querySelector(".pricing-3d-avatar");
+
+if (pricingVisual && pricingAvatar && window.innerWidth > 700) {
+
+    pricingVisual.addEventListener("mousemove", function (event) {
+
+        const rect = pricingVisual.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY = ((x - centerX) / centerX) * 6;
+        const rotateX = ((centerY - y) / centerY) * 5;
+
+        pricingAvatar.style.transform =
+            `translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+
+    });
+
+    pricingVisual.addEventListener("mouseleave", function () {
+
+        pricingAvatar.style.transform =
+            "translateY(0) rotateX(0deg) rotateY(0deg) scale(1)";
+
+    });
+
+}
+/* =========================================================
+   PREMIUM PRICING POPUP
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const pricingModal = document.getElementById("pricingModal");
+    const pricingModalBackdrop =
+        document.getElementById("pricingModalBackdrop");
+
+    const pricingModalClose =
+        document.getElementById("pricingModalClose");
+
+    const modalPackageName =
+        document.getElementById("modalPackageName");
+
+    const modalPackageDescription =
+        document.getElementById("modalPackageDescription");
+
+    const modalPrice =
+        document.getElementById("modalPrice");
+
+    const modalPriceUnit =
+        document.getElementById("modalPriceUnit");
+
+    const modalFeatures =
+        document.getElementById("modalFeatures");
+
+    const modalStartBtn =
+        document.getElementById("modalStartBtn");
+
+
+    /* =====================================================
+       PACKAGE DATA
+    ===================================================== */
+
+    const packages = {
+
+        starter: {
+            name: "Starter",
+
+            description:
+                "Perfect for creators who want clean and engaging short-form content.",
+
+            price: "₹249",
+
+            unit: "/ video",
+
+            features: [
+                "1 Reel / Short",
+                "Clean cuts",
+                "Basic captions",
+                "Basic sound design",
+                "2 revisions"
+            ]
+        },
+
+
+        creator: {
+            name: "Creator",
+
+            description:
+                "Built for creators who want consistent, polished and engaging content.",
+
+            price: "₹1,499",
+
+            unit: "/ 3 videos",
+
+            features: [
+                "Advanced editing",
+                "Captions + motion",
+                "Sound design",
+                "Color grading",
+                "3 revisions"
+            ]
+        },
+
+
+        pro: {
+            name: "Pro",
+
+            description:
+                "For creators and brands who want premium cinematic editing and stronger visual impact.",
+
+            price: "₹2,999",
+
+            unit: "/ 5 videos",
+
+            features: [
+                "Premium editing",
+                "Advanced motion graphics",
+                "Cinematic color",
+                "Professional sound design",
+                "Priority delivery"
+            ]
+        }
+
+    };
+
+
+    /* =====================================================
+       OPEN POPUP
+    ===================================================== */
+
+    function openPricingModal(packageType) {
+
+        const selectedPackage = packages[packageType];
+
+        if (!selectedPackage || !pricingModal) return;
+
+
+        /* Update content */
+
+        if (modalPackageName) {
+            modalPackageName.textContent =
+                selectedPackage.name;
+        }
+
+        if (modalPackageDescription) {
+            modalPackageDescription.textContent =
+                selectedPackage.description;
+        }
+
+        if (modalPrice) {
+            modalPrice.textContent =
+                selectedPackage.price;
+        }
+
+        if (modalPriceUnit) {
+            modalPriceUnit.textContent =
+                selectedPackage.unit;
+        }
+
+
+        /* Update features */
+
+        if (modalFeatures) {
+
+            modalFeatures.innerHTML = "";
+
+            selectedPackage.features.forEach(function (feature) {
+
+                const featureElement =
+                    document.createElement("div");
+
+                featureElement.className =
+                    "modal-feature";
+
+                featureElement.innerHTML = `
+                    <span>✓</span>
+                    ${feature}
+                `;
+
+                modalFeatures.appendChild(
+                    featureElement
+                );
+
+            });
+
+        }
+
+
+        /* Open */
+
+        pricingModal.classList.add("active");
+
+        document.body.classList.add(
+            "pricing-modal-open"
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE POPUP
+    ===================================================== */
+
+    function closePricingModal() {
+
+        if (!pricingModal) return;
+
+        pricingModal.classList.remove("active");
+
+        document.body.classList.remove(
+            "pricing-modal-open"
+        );
+
+    }
+
+
+    /* =====================================================
+       PRICING BUTTONS
+    ===================================================== */
+
+    const pricingButtons =
+        document.querySelectorAll(
+            '#pricing .price .btn'
+        );
+
+
+    pricingButtons.forEach(function (button, index) {
+
+        button.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            let packageType;
+
+            if (index === 0) {
+                packageType = "starter";
+            }
+
+            else if (index === 1) {
+                packageType = "creator";
+            }
+
+            else if (index === 2) {
+                packageType = "pro";
+            }
+
+            openPricingModal(packageType);
+
+        });
+
+    });
+
+
+    /* =====================================================
+       CLOSE BUTTON
+    ===================================================== */
+
+    if (pricingModalClose) {
+
+        pricingModalClose.addEventListener(
+            "click",
+            closePricingModal
+        );
+
+    }
+
+
+    /* =====================================================
+       BACKDROP CLICK
+    ===================================================== */
+
+    if (pricingModalBackdrop) {
+
+        pricingModalBackdrop.addEventListener(
+            "click",
+            closePricingModal
+        );
+
+    }
+
+
+    /* =====================================================
+       ESC KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                pricingModal.classList.contains("active")
+            ) {
+                closePricingModal();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       PREVENT BACKGROUND SCROLL
+    ===================================================== */
+
+    const pricingModalStyle =
+        document.createElement("style");
+
+    pricingModalStyle.innerHTML = `
+        body.pricing-modal-open {
+            overflow: hidden !important;
+        }
+    `;
+
+    document.head.appendChild(
+        pricingModalStyle
+    );
+
+});
+/* =========================================================
+   PRICING POPUP — 3D MOUSE TILT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modalCard =
+        document.getElementById("pricingModalCard");
+
+    const modalVisual =
+        document.querySelector(".pricing-modal-visual");
+
+    const modalAvatar =
+        document.querySelector(".pricing-modal-avatar");
+
+    if (!modalCard || !modalVisual || !modalAvatar) return;
+
+
+    /* Desktop only */
+
+    if (window.innerWidth <= 760) return;
+
+
+    modalVisual.addEventListener(
+        "mousemove",
+        function (event) {
+
+            const rect =
+                modalVisual.getBoundingClientRect();
+
+            const x =
+                event.clientX - rect.left;
+
+            const y =
+                event.clientY - rect.top;
+
+
+            const centerX =
+                rect.width / 2;
+
+            const centerY =
+                rect.height / 2;
+
+
+            const rotateY =
+                ((x - centerX) / centerX) * 8;
+
+            const rotateX =
+                ((centerY - y) / centerY) * 6;
+
+
+            modalAvatar.style.animation =
+                "none";
+
+            modalAvatar.style.transform =
+                `
+                translateY(-5px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.04)
+                `;
+        }
+    );
+
+
+    /* Reset when mouse leaves */
+
+    modalVisual.addEventListener(
+        "mouseleave",
+        function () {
+
+            modalAvatar.style.transform =
+                "translateY(0) rotateX(0deg) rotateY(0deg) scale(1)";
+
+            modalAvatar.style.animation =
+                "modalAvatarFloat 5s ease-in-out infinite";
+
+        }
+    );
+
+});
+/* =========================================================
+   PREMIUM PRICING POPUP — 3D PARALLAX DEPTH
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const visual = document.querySelector(".pricing-modal-visual");
+
+    if (!visual || window.innerWidth <= 760) return;
+
+    const avatar = visual.querySelector(".pricing-modal-avatar");
+    const orbitOne = visual.querySelector(".orbit-one");
+    const orbitTwo = visual.querySelector(".orbit-two");
+
+    const chipOne = visual.querySelector(".chip-one");
+    const chipTwo = visual.querySelector(".chip-two");
+    const chipThree = visual.querySelector(".chip-three");
+
+    const light = visual.querySelector(".modal-3d-light");
+
+
+    visual.addEventListener("mousemove", function (event) {
+
+        const rect = visual.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const mouseX =
+            (x - rect.width / 2) /
+            (rect.width / 2);
+
+        const mouseY =
+            (y - rect.height / 2) /
+            (rect.height / 2);
+
+
+        /* ---------------------------------------------
+           MAIN CHARACTER — deepest visual
+        --------------------------------------------- */
+
+        if (avatar) {
+
+            avatar.style.animation = "none";
+
+            avatar.style.transform = `
+                translate3d(
+                    ${mouseX * 10}px,
+                    ${mouseY * 7}px,
+                    35px
+                )
+                rotateX(${-mouseY * 6}deg)
+                rotateY(${mouseX * 9}deg)
+                scale(1.04)
+            `;
+        }
+
+
+        /* ---------------------------------------------
+           ORBIT 1
+        --------------------------------------------- */
+
+        if (orbitOne) {
+
+            orbitOne.style.animation = "none";
+
+            orbitOne.style.transform = `
+                translate3d(
+                    ${mouseX * 8}px,
+                    ${mouseY * 5}px,
+                    15px
+                )
+                rotateX(66deg)
+                rotateZ(${mouseX * 12 - 18}deg)
+            `;
+        }
+
+
+        /* ---------------------------------------------
+           ORBIT 2
+        --------------------------------------------- */
+
+        if (orbitTwo) {
+
+            orbitTwo.style.animation = "none";
+
+            orbitTwo.style.transform = `
+                translate3d(
+                    ${mouseX * -6}px,
+                    ${mouseY * -4}px,
+                    5px
+                )
+                rotateX(66deg)
+                rotateZ(${mouseX * -10 + 38}deg)
+            `;
+        }
+
+
+        /* ---------------------------------------------
+           FLOATING CHIP 1
+        --------------------------------------------- */
+
+        if (chipOne) {
+
+            chipOne.style.animation = "none";
+
+            chipOne.style.transform = `
+                translate3d(
+                    ${mouseX * -14}px,
+                    ${mouseY * -10}px,
+                    45px
+                )
+                rotate(-6deg)
+            `;
+        }
+
+
+        /* ---------------------------------------------
+           FLOATING CHIP 2
+        --------------------------------------------- */
+
+        if (chipTwo) {
+
+            chipTwo.style.animation = "none";
+
+            chipTwo.style.transform = `
+                translate3d(
+                    ${mouseX * 18}px,
+                    ${mouseY * 12}px,
+                    65px
+                )
+                rotate(5deg)
+            `;
+        }
+
+
+        /* ---------------------------------------------
+           FLOATING CHIP 3
+        --------------------------------------------- */
+
+        if (chipThree) {
+
+            chipThree.style.animation = "none";
+
+            chipThree.style.transform = `
+                translate3d(
+                    ${mouseX * -10}px,
+                    ${mouseY * 15}px,
+                    30px
+                )
+                rotate(4deg)
+            `;
+        }
+
+
+        /* ---------------------------------------------
+           LIGHT
+        --------------------------------------------- */
+
+        if (light) {
+
+            light.style.animation = "none";
+
+            light.style.transform = `
+                translate3d(
+                    ${mouseX * 30}px,
+                    ${mouseY * 20}px,
+                    80px
+                )
+            `;
+        }
+
+    });
+
+
+    /* =====================================================
+       RESET WHEN MOUSE LEAVES
+    ===================================================== */
+
+    visual.addEventListener("mouseleave", function () {
+
+        if (avatar) {
+            avatar.style.animation =
+                "modalAvatarFloat 5s ease-in-out infinite";
+
+            avatar.style.transform =
+                "";
+        }
+
+        if (orbitOne) {
+            orbitOne.style.animation =
+                "orbitSpin 12s linear infinite";
+
+            orbitOne.style.transform =
+                "";
+        }
+
+        if (orbitTwo) {
+            orbitTwo.style.animation =
+                "orbitSpinReverse 17s linear infinite";
+
+            orbitTwo.style.transform =
+                "";
+        }
+
+        if (chipOne) {
+            chipOne.style.animation =
+                "chipFloatOne 4s ease-in-out infinite";
+
+            chipOne.style.transform =
+                "";
+        }
+
+        if (chipTwo) {
+            chipTwo.style.animation =
+                "chipFloatTwo 4.5s ease-in-out infinite";
+
+            chipTwo.style.transform =
+                "";
+        }
+
+        if (chipThree) {
+            chipThree.style.animation =
+                "chipFloatThree 5s ease-in-out infinite";
+
+            chipThree.style.transform =
+                "";
+        }
+
+        if (light) {
+            light.style.animation =
+                "lightOrbit 6s linear infinite";
+
+            light.style.transform =
+                "";
+        }
+
+    });
+
+});
+/* =========================================================
+   PRICING POPUP — PACKAGE SPECIFIC WHATSAPP
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const startBtn =
+        document.getElementById("modalStartBtn");
+
+    const packageName =
+        document.getElementById("modalPackageName");
+
+    const packagePrice =
+        document.getElementById("modalPrice");
+
+    const packageUnit =
+        document.getElementById("modalPriceUnit");
+
+
+    if (!startBtn) return;
+
+
+    startBtn.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+
+        const selectedPackage =
+            packageName
+                ? packageName.textContent.trim()
+                : "Video Editing";
+
+
+        const selectedPrice =
+            packagePrice
+                ? packagePrice.textContent.trim()
+                : "";
+
+
+        const selectedUnit =
+            packageUnit
+                ? packageUnit.textContent.trim()
+                : "";
+
+
+        const message =
+`Hello Priyatam Edits 👋
+
+I want to discuss the ${selectedPackage} package.
+
+Package: ${selectedPackage}
+Price: ${selectedPrice} ${selectedUnit}
+
+I would like to know more about the editing process and delivery.
+
+Thank you!`;
+
+
+        const whatsappURL =
+            "https://wa.me/916205706883?text=" +
+            encodeURIComponent(message);
+
+
+        window.open(
+            whatsappURL,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+    });
+
+});
+/* =========================================================
+   PRIYATAM EDITS — CINEMATIC INTRO CONTROLLER
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const intro =
+        document.getElementById("cinematicIntro");
+
+    const progress =
+        document.getElementById("introProgress");
+
+    const percent =
+        document.getElementById("introPercent");
+
+    if (!intro) return;
+
+
+    /* Prevent scrolling */
+
+    document.body.style.overflow = "hidden";
+
+
+    /* Percentage counter */
+
+    let value = 0;
+
+    const counter = setInterval(function () {
+
+        value += 2;
+
+        if (value > 100) {
+            value = 100;
+        }
+
+        if (percent) {
+            percent.textContent =
+                String(value).padStart(2, "0") + "%";
+        }
+
+        if (value >= 100) {
+            clearInterval(counter);
+        }
+
+    }, 48);
+
+
+    /* Finish intro */
+
+    setTimeout(function () {
+
+        intro.classList.add("intro-finished");
+
+        document.body.style.overflow = "";
+
+
+        /* Remove intro */
+
+        setTimeout(function () {
+
+            intro.remove();
+
+        }, 1100);
+
+    }, 4500);
+
+});
+/* =========================================================
+   PREMIUM CUSTOM CURSOR
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cursor = document.querySelector(".custom-cursor");
+    const glow = document.querySelector(".cursor-glow");
+
+    if (!cursor || !glow || window.innerWidth <= 768) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    let glowX = mouseX;
+    let glowY = mouseY;
+
+    document.addEventListener("mousemove", function (e) {
+
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursor.style.left = mouseX + "px";
+        cursor.style.top = mouseY + "px";
+    });
+
+    function animateGlow() {
+
+        glowX += (mouseX - glowX) * 0.12;
+        glowY += (mouseY - glowY) * 0.12;
+
+        glow.style.left = glowX + "px";
+        glow.style.top = glowY + "px";
+
+        requestAnimationFrame(animateGlow);
+    }
+
+    animateGlow();
+
+    const hoverElements = document.querySelectorAll(
+        "a, button, .price, .portfolio-card, .service-card, .chatbot-btn"
+    );
+
+    hoverElements.forEach(function (element) {
+
+        element.addEventListener("mouseenter", function () {
+            document.body.classList.add("cursor-hover");
+        });
+
+        element.addEventListener("mouseleave", function () {
+            document.body.classList.remove("cursor-hover");
+        });
+
+    });
+
+});
+/* =========================================================
+   MAGNETIC BUTTON EFFECT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    if (window.innerWidth <= 768) return;
+
+    const magneticButtons = document.querySelectorAll(
+        ".btn, .chatbot-btn"
+    );
+
+    magneticButtons.forEach(function (button) {
+
+        button.addEventListener("mousemove", function (event) {
+
+            const rect = button.getBoundingClientRect();
+
+            const x = event.clientX - rect.left - rect.width / 2;
+            const y = event.clientY - rect.top - rect.height / 2;
+
+            const moveX = x * 0.18;
+            const moveY = y * 0.18;
+
+            button.style.transform =
+                `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        button.addEventListener("mouseleave", function () {
+
+            button.style.transform = "translate(0, 0)";
+        });
+
+    });
+
+});
+/* =========================================================
+   PORTFOLIO 3D TILT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    if (window.innerWidth <= 768) return;
+
+    const cards = document.querySelectorAll(".portfolio-card");
+
+    cards.forEach(function (card) {
+
+        card.addEventListener("mousemove", function (event) {
+
+            const rect = card.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateY =
+                ((x - centerX) / centerX) * 7;
+
+            const rotateX =
+                ((centerY - y) / centerY) * 6;
+
+            card.style.transform =
+                `perspective(900px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-5px)`;
+        });
+
+        card.addEventListener("mouseleave", function () {
+
+            card.style.transform =
+                "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
+        });
+
+    });
+
+});
+/* =========================================================
+   BEFORE / AFTER SLIDER FUNCTION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slider = document.querySelector(".before-after");
+    const range = document.querySelector(".before-after-range");
+    const beforeImage = document.querySelector(".before-image");
+    const sliderLine = document.querySelector(".slider-line");
+
+    if (!slider || !range || !beforeImage || !sliderLine) return;
+
+    function updateBeforeAfter(value) {
+
+        beforeImage.style.width = value + "%";
+        sliderLine.style.left = value + "%";
+
+    }
+
+    range.addEventListener("input", function () {
+
+        updateBeforeAfter(this.value);
+
+    });
+
+    updateBeforeAfter(range.value);
+
+});
