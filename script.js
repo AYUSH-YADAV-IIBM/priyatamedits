@@ -1178,7 +1178,7 @@ document
   }
 
   // Business details
-  const WHATSAPP = "916205706883";
+  const WHATSAPP = "6205706883";
   const EMAIL = "Priyatamkumar84@gmail.com";
   const INSTAGRAM = "https://www.instagram.com/priyatam.cuts/";
 
@@ -1699,7 +1699,7 @@ document
     messages.scrollTop = messages.scrollHeight;
   }
 
-  function botRespond(html, delay = 450) {
+  function botRespond(html, delay = 1000) {
     const typing = document.createElement("div");
     typing.className = "bot-message shrii-typing";
     typing.innerHTML = `

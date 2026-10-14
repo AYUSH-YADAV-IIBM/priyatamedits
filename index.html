@@ -2034,6 +2034,468 @@
 
 
 
+<!-- PRIYATAM EDITS — COOKIE CONSENT POPUP -->
+<style>
+  #pe-consent,
+  #pe-consent * {
+    box-sizing: border-box;
+  }
+
+  #pe-consent {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  #pe-consent .pe-cookie-card {
+    width: 100%;
+    max-width: 470px;
+    padding: 28px;
+    color: #f5f5f5;
+    background: #111111;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+    animation: peCookieAppear 0.25s ease-out;
+  }
+
+  #pe-consent .pe-cookie-brand {
+    margin: 0 0 12px;
+    color: #d4af37;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  #pe-consent .pe-cookie-title {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 25px;
+    line-height: 1.3;
+  }
+
+  #pe-consent .pe-cookie-description {
+    margin: 0 0 20px;
+    color: #c4c4c4;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  #pe-consent .pe-cookie-link {
+    color: #e5c65a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #pe-consent .pe-cookie-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #pe-consent .pe-cookie-btn {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  #pe-consent .pe-cookie-accept {
+    color: #111111;
+    background: #d4af37;
+  }
+
+  #pe-consent .pe-cookie-accept:hover {
+    background: #ebcb59;
+  }
+
+  #pe-consent .pe-cookie-decline {
+    color: #ffffff;
+    background: #202020;
+    border-color: #414141;
+  }
+
+  #pe-consent .pe-cookie-decline:hover {
+    background: #2b2b2b;
+  }
+
+  #pe-consent .pe-cookie-customize {
+    color: #e5c65a;
+    background: transparent;
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  #pe-consent .pe-cookie-customize:hover {
+    background: rgba(212, 175, 55, 0.08);
+  }
+
+  #pe-consent .pe-cookie-preferences {
+    display: none;
+    margin: 0 0 16px;
+    padding: 15px;
+    background: #191919;
+    border: 1px solid #333333;
+    border-radius: 9px;
+  }
+
+  #pe-consent .pe-cookie-preferences.is-open {
+    display: block;
+  }
+
+  #pe-consent .pe-cookie-preferences h3 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 15px;
+  }
+
+  #pe-consent .pe-cookie-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 12px 0;
+    color: #e5e5e5;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  #pe-consent .pe-cookie-option input {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    accent-color: #d4af37;
+    flex-shrink: 0;
+  }
+
+  #pe-consent .pe-cookie-option strong {
+    display: block;
+    margin-bottom: 2px;
+    color: #ffffff;
+  }
+
+  #pe-consent .pe-cookie-option small {
+    display: block;
+    color: #aaaaaa;
+    font-size: 12px;
+  }
+
+  #pe-consent .pe-cookie-footer {
+    margin-top: 16px;
+    color: #858585;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  @keyframes peCookieAppear {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    #pe-consent {
+      padding: 14px;
+    }
+
+    #pe-consent .pe-cookie-card {
+      padding: 22px 18px;
+      border-radius: 13px;
+    }
+
+    #pe-consent .pe-cookie-title {
+      font-size: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #pe-consent .pe-cookie-card {
+      animation: none;
+    }
+
+    #pe-consent .pe-cookie-btn {
+      transition: none;
+    }
+  }
+</style>
+
+<div
+  id="pe-consent"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="pe-cookie-title"
+  aria-describedby="pe-cookie-description"
+>
+  <div class="pe-cookie-card">
+    <p class="pe-cookie-brand">Priyatam Edits</p>
+
+    <h2 class="pe-cookie-title" id="pe-cookie-title">
+      Your Privacy Matters
+    </h2>
+
+    <p class="pe-cookie-description" id="pe-cookie-description">
+      We use essential storage to make this website work.
+      With your permission, we may also use analytics cookies
+      to understand website usage and improve your experience.
+      You can accept all cookies, decline optional cookies,
+      or customize your preferences.
+    </p>
+
+    <div
+      class="pe-cookie-preferences"
+      id="pe-cookie-preferences"
+    >
+      <h3>Cookie Preferences</h3>
+
+      <label class="pe-cookie-option">
+        <input type="checkbox" checked disabled>
+        <span>
+          <strong>Essential storage</strong>
+          <small>
+            Required for basic website functionality.
+          </small>
+        </span>
+      </label>
+
+      <label class="pe-cookie-option">
+        <input
+          type="checkbox"
+          id="pe-cookie-analytics"
+        >
+        <span>
+          <strong>Analytics cookies</strong>
+          <small>
+            Help us understand website traffic and usage.
+          </small>
+        </span>
+      </label>
+    </div>
+
+    <div class="pe-cookie-actions">
+      <button
+        type="button"
+        class="pe-cookie-btn pe-cookie-accept"
+        id="pe-cookie-accept"
+      >
+        Accept All
+      </button>
+
+      <button
+        type="button"
+        class="pe-cookie-btn pe-cookie-decline"
+        id="pe-cookie-decline"
+      >
+        Decline Optional
+      </button>
+
+      <button
+        type="button"
+        class="pe-cookie-btn pe-cookie-customize"
+        id="pe-cookie-customize"
+        aria-expanded="false"
+        aria-controls="pe-cookie-preferences"
+      >
+        Customize Preferences
+      </button>
+
+      <button
+        type="button"
+        class="pe-cookie-btn pe-cookie-accept"
+        id="pe-cookie-save"
+        style="display:none"
+      >
+        Save Preferences
+      </button>
+    </div>
+
+    <p class="pe-cookie-footer">
+      You can change your choice by clearing this website's
+      saved browser data. Your preference is stored on this device.
+    </p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEY = "pe_cookie_preferences";
+  const GA_ID = "G-V8J6WF4EVN";
+
+  const root = document.getElementById("pe-consent");
+  const acceptBtn = document.getElementById("pe-cookie-accept");
+  const declineBtn = document.getElementById("pe-cookie-decline");
+  const customizeBtn = document.getElementById("pe-cookie-customize");
+  const saveBtn = document.getElementById("pe-cookie-save");
+  const preferences = document.getElementById("pe-cookie-preferences");
+  const analyticsCheckbox = document.getElementById("pe-cookie-analytics");
+
+  if (
+    !root ||
+    !acceptBtn ||
+    !declineBtn ||
+    !customizeBtn ||
+    !saveBtn ||
+    !preferences ||
+    !analyticsCheckbox
+  ) {
+    return;
+  }
+
+  let analyticsLoaded = false;
+
+  function readChoice() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+
+      const choice = JSON.parse(raw);
+
+      if (
+        !choice ||
+        typeof choice.analytics !== "boolean"
+      ) {
+        return null;
+      }
+
+      return choice;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function saveChoice(analytics) {
+    const choice = {
+      essential: true,
+      analytics: Boolean(analytics),
+      savedAt: new Date().toISOString()
+    };
+
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(choice)
+      );
+    } catch (error) {
+      console.warn(
+        "Cookie preference could not be saved.",
+        error
+      );
+    }
+
+    return choice;
+  }
+
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
+
+    analyticsLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag("consent", "default", {
+      analytics_storage: "granted"
+    });
+
+    window.gtag("js", new Date());
+    window.gtag("config", GA_ID);
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src =
+      "https://www.googletagmanager.com/gtag/js?id=" +
+      encodeURIComponent(GA_ID);
+
+    script.onerror = function () {
+      analyticsLoaded = false;
+    };
+
+    document.head.appendChild(script);
+  }
+
+  function applyChoice(analytics) {
+    if (analytics) {
+      loadAnalytics();
+    }
+  }
+
+  function closePopup() {
+    root.style.display = "none";
+    root.setAttribute("aria-hidden", "true");
+  }
+
+  function finishChoice(analytics) {
+    saveChoice(analytics);
+    applyChoice(analytics);
+    closePopup();
+  }
+
+  acceptBtn.addEventListener("click", function () {
+    finishChoice(true);
+  });
+
+  declineBtn.addEventListener("click", function () {
+    finishChoice(false);
+  });
+
+  customizeBtn.addEventListener("click", function () {
+    const isOpen = preferences.classList.toggle("is-open");
+
+    customizeBtn.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+    saveBtn.style.display = isOpen ? "block" : "none";
+    customizeBtn.textContent = isOpen
+      ? "Hide Preferences"
+      : "Customize Preferences";
+  });
+
+  saveBtn.addEventListener("click", function () {
+    finishChoice(analyticsCheckbox.checked);
+  });
+
+  // Normal website behavior:
+  // saved choice -> apply it and keep popup hidden.
+  // no saved choice -> show popup on the first visit.
+  const saved = readChoice();
+
+  if (saved) {
+    applyChoice(saved.analytics);
+    closePopup();
+  } else {
+    root.style.display = "flex";
+    root.setAttribute("aria-hidden", "false");
+    acceptBtn.focus();
+  }
+})();
+</script>
+<!-- END COOKIE CONSENT POPUP -->
+
 </body>
 
 </html>
