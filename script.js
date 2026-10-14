@@ -160,6 +160,14 @@ const portfolioData = {
             "Promotional reels, social media content and high-retention edits created for clients.",
 
         videos: [
+           {
+    title: "Luxury Living – Home Theatre & Custom Interiors",
+    type: "Client Project",
+    createdFor: "Luxury Home Interiors",
+    description:
+        "Premium home theatre installations, elegant living spaces, customized sofa beds and luxury furniture showcased through cinematic visuals, smooth transitions and refined color grading.",
+    file: "Home theater .mp4"
+},
 
             {
                 title: "Sunraaj – Construction Promotional Reel",
@@ -1146,712 +1154,1064 @@ document
     });
 
 
-/* =========================================================
-   CHATBOT
-   SINGLE CLEAN VERSION
-========================================================= */
 
 /* =========================================================
-   SHrii — PRIYATAM EDITS PERSONAL ASSISTANT
-========================================================= */
+   SHrii PREMIUM CHATBOT — PRIYATAM EDITS
+   Multilingual | Welcome Popup | Developer | Enquiry
+   AG Digital Hub removed
+   ========================================================= */
 
-const chatbotBtn =
-    document.getElementById("chatbotBtn");
+(() => {
+  "use strict";
 
-const chatbotBox =
-    document.getElementById("chatbotBox");
+  // Existing website HTML IDs
+  const btn = document.getElementById("chatbotBtn");
+  const box = document.getElementById("chatbotBox");
+  const close = document.getElementById("chatbotClose");
+  const messages = document.getElementById("chatbotMessages");
+  const input = document.getElementById("chatbotInput");
+  const send = document.getElementById("chatbotSend");
 
-const chatbotClose =
-    document.getElementById("chatbotClose");
+  if (!box || !messages || !input) {
+    console.error("Shrii: Chatbot HTML elements not found.");
+    return;
+  }
 
-const chatbotMessages =
-    document.getElementById("chatbotMessages");
+  // Business details
+  const WHATSAPP = "916205706883";
+  const EMAIL = "Priyatamkumar84@gmail.com";
+  const INSTAGRAM = "https://www.instagram.com/priyatam.cuts/";
 
-const chatbotInput =
-    document.getElementById("chatbotInput");
+  // Developer details
+  const DEVELOPER = "Ayush Yadav";
+  const DEVELOPER_EMAIL = "ayushkumar85890@gmail.com";
+  const DEVELOPER_INSTAGRAM =
+    "https://www.instagram.com/ayush_yadav1_/";
 
-const chatbotSend =
-    document.getElementById("chatbotSend");
+  let language = "hinglish";
+  let enquiry = null;
+  let welcomeShown = false;
+  let welcomePopup = null;
+  let developerPopup = null;
 
+  const languageNames = {
+    en: "English",
+    hi: "हिन्दी",
+    hinglish: "Hinglish",
+    es: "Español",
+    fr: "Français"
+  };
 
-/* =========================================================
-   OPEN CHATBOT
-========================================================= */
+  // ---------------------------------------------------------
+  // TRANSLATIONS
+  // ---------------------------------------------------------
 
-if (chatbotBtn && chatbotBox) {
+  const translations = {
+    en: {
+      choose: "Choose your language",
+      welcomeTitle: "Meet Shrii ✨",
+      welcome: "Your personal assistant at Priyatam Edits. Explore services, pricing, portfolio or start a video project.",
+      start: "Start chatting",
+      cancel: "Close",
+      greet: "Hey! Welcome to Priyatam Edits ✨ I'm Shrii. I can help you with pricing, services, portfolio, revisions and video project enquiries.",
+      pricing: "<strong>Our Editing Packages 💰</strong><br><br><strong>Starter — ₹249 / video</strong><br>Basic cuts, captions, sound design and 2 revisions.<br><br><strong>Creator — ₹1,499 / 3 videos</strong><br>Advanced editing, captions, motion graphics, color grading and 3 revisions.<br><br><strong>Pro — ₹2,999 / 5 videos</strong><br>Premium editing, motion graphics, cinematic color and priority delivery.",
+      services: "<strong>Our Services 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts and videos<br>• Captions and subtitles<br>• Motion graphics<br>• Color grading<br>• Sound design<br>• AI / faceless video editing",
+      portfolio: "Visit the Portfolio section on our website to explore our available video samples and editing styles. 🎥",
+      process: "<strong>How It Works</strong><br><br>1. Share your video requirements.<br>2. Discuss style, footage and budget.<br>3. Confirm the price and deadline.<br>4. We edit and share a preview.<br>5. Final delivery after agreed revisions. ✅",
+      revisions: "Starter includes 2 revisions. Creator includes 3 revisions. Please confirm the revision terms for Pro before starting your project.",
+      contact: "Contact Priyatam Edits:<br><br><a href='https://wa.me/916205706883' target='_blank' rel='noopener noreferrer'>💬 WhatsApp</a><br><br><a href='mailto:Priyatamkumar84@gmail.com'>📧 Email</a><br><br><a href='https://www.instagram.com/priyatam.cuts/' target='_blank' rel='noopener noreferrer'>📸 Instagram</a>",
+      enquiry: "Let's plan your video project! 🎬<br><br>What type of video do you need? For example: Reel, YouTube Short, long video, cinematic or faceless video.",
+      quantity: "How many videos do you need? Example: 1 Reel, 3 Shorts or 10 videos.",
+      deadline: "When do you need the videos delivered? Example: 2 days, 1 week or a specific date.",
+      budget: "What is your approximate budget? Example: ₹500, ₹1,500 or negotiable.",
+      ready: "Your project brief is ready! 🎉 Review the details in WhatsApp and press Send when you're ready.",
+      unknown: "I can help with pricing, services, portfolio, revisions, contact details and project enquiries. Try asking about one of these!",
+      typing: "Shrii is typing",
+      devTitle: "Meet the Developer",
+      devText: "Website Developer & Digital Creator",
+      devClose: "Back to chat",
+      developer: "About Developer",
+      cancelEnquiry: "Enquiry cancelled. You can start again whenever you're ready.",
+      footer: "Website developed by",
+      sendWhatsApp: "💬 Continue on WhatsApp",
+      cancelProject: "Type 'cancel' to stop this enquiry."
+    },
 
-    chatbotBtn.addEventListener(
-        "click",
-        function(event) {
+    hi: {
+      choose: "अपनी भाषा चुनें",
+      welcomeTitle: "Shrii से मिलिए ✨",
+      welcome: "Priyatam Edits की आपकी निजी सहायक। सर्विस, कीमत, पोर्टफोलियो देखें या अपना वीडियो प्रोजेक्ट शुरू करें।",
+      start: "चैट शुरू करें",
+      cancel: "बंद करें",
+      greet: "नमस्ते! Priyatam Edits में आपका स्वागत है ✨ मैं Shrii हूँ। मैं आपको कीमत, वीडियो एडिटिंग सर्विस, पोर्टफोलियो और प्रोजेक्ट पूछताछ में मदद कर सकती हूँ।",
+      pricing: "<strong>हमारे एडिटिंग पैकेज 💰</strong><br><br><strong>Starter — ₹249 / वीडियो</strong><br>बेसिक कट्स, कैप्शन, साउंड डिजाइन और 2 रिवीजन।<br><br><strong>Creator — ₹1,499 / 3 वीडियो</strong><br>एडवांस एडिटिंग, कैप्शन, मोशन ग्राफिक्स, कलर ग्रेडिंग और 3 रिवीजन।<br><br><strong>Pro — ₹2,999 / 5 वीडियो</strong><br>प्रीमियम एडिटिंग, मोशन ग्राफिक्स, सिनेमैटिक कलर और प्राथमिकता वाली डिलीवरी।",
+      services: "<strong>हमारी सर्विसेज 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts और वीडियो<br>• कैप्शन और सबटाइटल<br>• मोशन ग्राफिक्स<br>• कलर ग्रेडिंग<br>• साउंड डिजाइन<br>• AI / Faceless वीडियो एडिटिंग",
+      portfolio: "हमारी वेबसाइट के Portfolio सेक्शन में जाकर वीडियो सैंपल और एडिटिंग स्टाइल देखें। 🎥",
+      process: "<strong>काम करने का तरीका</strong><br><br>1. वीडियो की जरूरत बताएं।<br>2. स्टाइल, फुटेज और बजट पर बात करें।<br>3. कीमत और समय तय करें।<br>4. एडिटिंग और प्रीव्यू मिलेगा।<br>5. तय रिवीजन के बाद फाइनल वीडियो। ✅",
+      revisions: "Starter में 2 और Creator में 3 रिवीजन शामिल हैं। Pro के रिवीजन की शर्तें प्रोजेक्ट शुरू करने से पहले कन्फर्म करें।",
+      contact: "Priyatam Edits से संपर्क करें:<br><br><a href='https://wa.me/916205706883' target='_blank' rel='noopener noreferrer'>💬 WhatsApp</a><br><br><a href='mailto:Priyatamkumar84@gmail.com'>📧 Email</a><br><br><a href='https://www.instagram.com/priyatam.cuts/' target='_blank' rel='noopener noreferrer'>📸 Instagram</a>",
+      enquiry: "चलिए आपका वीडियो प्रोजेक्ट शुरू करते हैं! 🎬<br><br>किस तरह का वीडियो एडिट करवाना है? जैसे Reel, YouTube Short, लंबा वीडियो या Cinematic वीडियो।",
+      quantity: "कितने वीडियो एडिट करवाने हैं? जैसे 1 Reel, 3 Shorts या 10 वीडियो।",
+      deadline: "वीडियो कब तक चाहिए? जैसे 2 दिन, 1 हफ्ता या कोई खास तारीख।",
+      budget: "आपका लगभग बजट कितना है? जैसे ₹500, ₹1,500 या बातचीत से तय करेंगे।",
+      ready: "आपकी प्रोजेक्ट डिटेल तैयार है! 🎉 WhatsApp पर जानकारी देखें और तैयार होने पर Send दबाएं।",
+      unknown: "मैं कीमत, सर्विस, पोर्टफोलियो, रिवीजन, संपर्क और प्रोजेक्ट की जानकारी दे सकती हूँ। 😊",
+      typing: "Shrii जवाब लिख रही है",
+      devTitle: "डेवलपर से मिलिए",
+      devText: "वेबसाइट डेवलपर और डिजिटल क्रिएटर",
+      devClose: "चैट पर वापस जाएं",
+      developer: "डेवलपर के बारे में",
+      cancelEnquiry: "पूछताछ रद्द कर दी गई है। आप चाहें तो दोबारा शुरू कर सकते हैं।",
+      footer: "वेबसाइट डेवलपर",
+      sendWhatsApp: "💬 WhatsApp पर आगे बढ़ें",
+      cancelProject: "पूछताछ रोकने के लिए 'cancel' लिखें।"
+    },
 
-            event.stopPropagation();
+    hinglish: {
+      choose: "Apni language select karo",
+      welcomeTitle: "Meet Shrii ✨",
+      welcome: "Priyatam Edits ki personal assistant. Pricing, services, portfolio dekho ya apna video project start karo.",
+      start: "Chat start karo",
+      cancel: "Close",
+      greet: "Hey! Priyatam Edits mein welcome hai ✨ Main Shrii hoon. Pricing, editing services, portfolio, revisions aur project enquiry mein help karungi.",
+      pricing: "<strong>Editing Packages 💰</strong><br><br><strong>Starter — ₹249 / video</strong><br>Basic cuts, captions, sound design aur 2 revisions.<br><br><strong>Creator — ₹1,499 / 3 videos</strong><br>Advanced editing, captions, motion graphics, color grading aur 3 revisions.<br><br><strong>Pro — ₹2,999 / 5 videos</strong><br>Premium editing, cinematic color, motion graphics aur priority delivery.",
+      services: "<strong>Our Services 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts aur videos<br>• Captions & subtitles<br>• Motion graphics<br>• Color grading<br>• Sound design<br>• AI / Faceless editing",
+      portfolio: "Website ke Portfolio section mein available samples aur editing styles explore karo. 🎥",
+      process: "<strong>Project Process</strong><br><br>1. Video requirements batao.<br>2. Style, footage aur budget discuss karo.<br>3. Price aur deadline confirm karo.<br>4. Editing aur preview milega.<br>5. Agreed revisions ke baad final delivery. ✅",
+      revisions: "Starter mein 2 aur Creator mein 3 revisions hain. Pro ke revision terms project start hone se pehle confirm kar lena.",
+      contact: "Priyatam Edits se connect karo:<br><br><a href='https://wa.me/916205706883' target='_blank' rel='noopener noreferrer'>💬 WhatsApp</a><br><br><a href='mailto:Priyatamkumar84@gmail.com'>📧 Email</a><br><br><a href='https://www.instagram.com/priyatam.cuts/' target='_blank' rel='noopener noreferrer'>📸 Instagram</a>",
+      enquiry: "Chalo tumhara video project plan karte hain! 🎬<br><br>Kis type ka video edit karwana hai? Reel, YouTube Short, long video, cinematic ya faceless video?",
+      quantity: "Kitne videos chahiye? Example: 1 Reel, 3 Shorts ya 10 videos.",
+      deadline: "Delivery kab tak chahiye? Example: 2 din, 1 week ya specific date.",
+      budget: "Approx budget kitna hai? Example: ₹500, ₹1,500 ya negotiable.",
+      ready: "Project brief ready hai! 🎉 WhatsApp par details check karo aur Send button dabao.",
+      unknown: "Main pricing, services, portfolio, revisions, contact aur project enquiry mein help kar sakti hoon. 😊",
+      typing: "Shrii type kar rahi hai",
+      devTitle: "Meet the Developer",
+      devText: "Website Developer & Digital Creator",
+      devClose: "Chat par wapas jao",
+      developer: "About Developer",
+      cancelEnquiry: "Enquiry cancel ho gayi. Jab chaho dobara start kar sakte ho.",
+      footer: "Website developed by",
+      sendWhatsApp: "💬 WhatsApp par continue karo",
+      cancelProject: "Enquiry cancel karne ke liye 'cancel' type karo."
+    },
 
-            chatbotBox.classList.toggle("active");
+    es: {
+      choose: "Elige tu idioma",
+      welcomeTitle: "Conoce a Shrii ✨",
+      welcome: "Tu asistente personal de Priyatam Edits. Consulta servicios, precios, portafolio o inicia un proyecto.",
+      start: "Comenzar chat",
+      cancel: "Cerrar",
+      greet: "¡Hola! Bienvenido a Priyatam Edits ✨ Soy Shrii. Puedo ayudarte con precios, servicios, portafolio y proyectos.",
+      pricing: "<strong>Paquetes de edición 💰</strong><br><br><strong>Starter — ₹249 / vídeo</strong><br>Cortes básicos, subtítulos, sonido y 2 revisiones.<br><br><strong>Creator — ₹1,499 / 3 vídeos</strong><br>Edición avanzada, gráficos, color y 3 revisiones.<br><br><strong>Pro — ₹2,999 / 5 vídeos</strong><br>Edición premium y entrega prioritaria.",
+      services: "Servicios: Reels de Instagram, YouTube Shorts, subtítulos, motion graphics, corrección de color, sonido y edición AI.",
+      portfolio: "Visita la sección Portfolio de nuestra web para ver los ejemplos disponibles. 🎥",
+      process: "Comparte tus requisitos, confirma estilo y precio, revisa la vista previa y recibe el vídeo final tras las revisiones acordadas.",
+      revisions: "Starter incluye 2 revisiones y Creator incluye 3. Confirma las condiciones de Pro antes de comenzar.",
+      contact: "Contacta con Priyatam Edits:<br><br><a href='https://wa.me/916205706883' target='_blank' rel='noopener noreferrer'>💬 WhatsApp</a><br><br><a href='mailto:Priyatamkumar84@gmail.com'>📧 Email</a><br><br><a href='https://www.instagram.com/priyatam.cuts/' target='_blank' rel='noopener noreferrer'>📸 Instagram</a>",
+      enquiry: "¿Qué tipo de vídeo necesitas? Por ejemplo, Reel, YouTube Short o vídeo largo.",
+      quantity: "¿Cuántos vídeos necesitas?",
+      deadline: "¿Cuándo necesitas la entrega?",
+      budget: "¿Cuál es tu presupuesto aproximado?",
+      ready: "¡Tu resumen está listo! Revisa el mensaje de WhatsApp y pulsa Enviar.",
+      unknown: "Puedo ayudarte con precios, servicios, portafolio, revisiones y proyectos.",
+      typing: "Shrii está escribiendo",
+      devTitle: "Conoce al desarrollador",
+      devText: "Desarrollador web y creador digital",
+      devClose: "Volver al chat",
+      developer: "Sobre el desarrollador",
+      cancelEnquiry: "Consulta cancelada. Puedes comenzar de nuevo.",
+      footer: "Desarrollado por",
+      sendWhatsApp: "💬 Continuar en WhatsApp",
+      cancelProject: "Escribe 'cancel' para detener la consulta."
+    },
 
-            if (
-                chatbotBox.classList.contains("active") &&
-                chatbotInput
-            ) {
-                setTimeout(
-                    function() {
-                        chatbotInput.focus();
-                    },
-                    150
-                );
-            }
+    fr: {
+      choose: "Choisissez votre langue",
+      welcomeTitle: "Découvrez Shrii ✨",
+      welcome: "Votre assistante personnelle chez Priyatam Edits. Découvrez les services, les tarifs ou démarrez un projet.",
+      start: "Commencer la discussion",
+      cancel: "Fermer",
+      greet: "Bonjour et bienvenue chez Priyatam Edits ✨ Je suis Shrii. Je peux vous aider avec les tarifs, les services et les projets.",
+      pricing: "<strong>Forfaits de montage 💰</strong><br><br><strong>Starter — ₹249 / vidéo</strong><br>Coupes simples, sous-titres, son et 2 révisions.<br><br><strong>Creator — ₹1,499 / 3 vidéos</strong><br>Montage avancé, animations, étalonnage et 3 révisions.<br><br><strong>Pro — ₹2,999 / 5 vidéos</strong><br>Montage premium et livraison prioritaire.",
+      services: "Services : Reels Instagram, YouTube Shorts, sous-titres, motion design, étalonnage, design sonore et montage AI.",
+      portfolio: "Consultez la section Portfolio de notre site pour découvrir les exemples disponibles. 🎥",
+      process: "Partagez vos besoins, confirmez le style et le prix, vérifiez l'aperçu et recevez la vidéo finale après les révisions convenues.",
+      revisions: "Starter comprend 2 révisions et Creator en comprend 3. Confirmez les conditions de Pro avant de commencer.",
+      contact: "Contactez Priyatam Edits :<br><br><a href='https://wa.me/916205706883' target='_blank' rel='noopener noreferrer'>💬 WhatsApp</a><br><br><a href='mailto:Priyatamkumar84@gmail.com'>📧 Email</a><br><br><a href='https://www.instagram.com/priyatam.cuts/' target='_blank' rel='noopener noreferrer'>📸 Instagram</a>",
+      enquiry: "Quel type de vidéo souhaitez-vous ? Par exemple, Reel, YouTube Short ou vidéo longue.",
+      quantity: "Combien de vidéos souhaitez-vous ?",
+      deadline: "Pour quand souhaitez-vous la livraison ?",
+      budget: "Quel est votre budget approximatif ?",
+      ready: "Votre demande est prête ! Vérifiez le message WhatsApp et appuyez sur Envoyer.",
+      unknown: "Je peux vous aider avec les tarifs, les services, le portfolio, les révisions et les projets.",
+      typing: "Shrii écrit",
+      devTitle: "Rencontrez le développeur",
+      devText: "Développeur web et créateur numérique",
+      devClose: "Retour au chat",
+      developer: "À propos du développeur",
+      cancelEnquiry: "Demande annulée. Vous pouvez recommencer.",
+      footer: "Développé par",
+      sendWhatsApp: "💬 Continuer sur WhatsApp",
+      cancelProject: "Écrivez 'cancel' pour arrêter la demande."
+    }
+  };
 
+  const t = key =>
+    (translations[language] && translations[language][key]) ||
+    translations.en[key] || "";
+
+  // ---------------------------------------------------------
+  // PREMIUM BLACK & GOLD DESIGN
+  // ---------------------------------------------------------
+
+  if (!document.getElementById("shrii-premium-styles")) {
+    const style = document.createElement("style");
+    style.id = "shrii-premium-styles";
+
+    style.textContent = `
+      #chatbotBox {
+        overflow: hidden !important;
+        border: 1px solid rgba(255,210,28,.35) !important;
+        border-radius: 20px !important;
+        box-shadow: 0 22px 75px rgba(0,0,0,.42),
+                    0 0 28px rgba(255,210,28,.08) !important;
+        backdrop-filter: blur(18px);
+      }
+
+      #chatbotBox .shrii-toolbar {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:8px;
+        padding:10px 13px;
+        background:linear-gradient(135deg,#171717,#292619);
+        border-bottom:1px solid rgba(255,210,28,.2);
+      }
+
+      #chatbotBox .shrii-toolbar label {
+        color:#f8d84c;
+        font-size:12px;
+        font-weight:700;
+      }
+
+      #chatbotBox .shrii-language {
+        max-width:145px;
+        padding:8px 10px;
+        border-radius:10px;
+        color:#fff;
+        background:#242424;
+        border:1px solid rgba(255,210,28,.35);
+        font-size:12px;
+      }
+
+      #chatbotBox #chatbotMessages {
+        scroll-behavior:smooth;
+      }
+
+      #chatbotBox .bot-message,
+      #chatbotBox .user-message {
+        box-sizing:border-box;
+        max-width:90%;
+        width:fit-content;
+        padding:12px 14px;
+        margin:10px 0;
+        line-height:1.65;
+        overflow-wrap:anywhere;
+        font-size:14px;
+        border-radius:16px;
+        animation:shriiAppear .22s ease-out;
+      }
+
+      #chatbotBox .bot-message {
+        border:1px solid rgba(255,210,28,.16);
+        border-bottom-left-radius:5px;
+      }
+
+      #chatbotBox .user-message {
+        margin-left:auto;
+        border:1px solid rgba(255,210,28,.35);
+        border-bottom-right-radius:5px;
+      }
+
+      #chatbotBox .bot-message a {
+        color:#ffd21c;
+        overflow-wrap:anywhere;
+      }
+
+      #chatbotBox .shrii-typing {
+        color:#ffd21c;
+        font-style:italic;
+      }
+
+      #chatbotBox .shrii-dots {
+        display:inline-flex;
+        gap:4px;
+        margin-left:6px;
+      }
+
+      #chatbotBox .shrii-dots i {
+        width:5px;
+        height:5px;
+        display:inline-block;
+        border-radius:50%;
+        background:#ffd21c;
+        animation:shriiBounce .8s infinite alternate;
+      }
+
+      #chatbotBox .shrii-dots i:nth-child(2) {
+        animation-delay:.2s;
+      }
+
+      #chatbotBox .shrii-dots i:nth-child(3) {
+        animation-delay:.4s;
+      }
+
+      #chatbotBox .shrii-project-button {
+        display:inline-block;
+        padding:11px 15px;
+        border-radius:11px;
+        text-decoration:none;
+        font-weight:800;
+        color:#171717 !important;
+        background:linear-gradient(135deg,#ffe66b,#ffc800);
+      }
+
+      #chatbotBox .shrii-footer {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-wrap:wrap;
+        gap:5px;
+        padding:9px 8px;
+        border-top:1px solid rgba(255,210,28,.13);
+        color:#aaa;
+        font-size:10px;
+        text-align:center;
+      }
+
+      #chatbotBox .shrii-footer button {
+        padding:3px 5px;
+        border:0;
+        background:none;
+        color:#ffd21c;
+        cursor:pointer;
+        font-size:10px;
+      }
+
+      .shrii-overlay {
+        position:fixed;
+        inset:0;
+        z-index:2147483000;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:18px;
+        background:rgba(4,4,4,.78);
+        backdrop-filter:blur(10px);
+        animation:shriiAppear .2s ease-out;
+      }
+
+      .shrii-modal {
+        box-sizing:border-box;
+        width:min(100%,410px);
+        max-height:90vh;
+        overflow:auto;
+        padding:27px 23px;
+        color:#f7f7f7;
+        text-align:center;
+        background:linear-gradient(145deg,#1c1c1c,#101010);
+        border:1px solid rgba(255,210,28,.4);
+        border-radius:24px;
+        box-shadow:0 25px 90px rgba(0,0,0,.55);
+      }
+
+      .shrii-modal .shrii-logo {
+        width:58px;
+        height:58px;
+        margin:0 auto 15px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:18px;
+        color:#171717;
+        font-size:27px;
+        background:linear-gradient(135deg,#ffe875,#ffca05);
+      }
+
+      .shrii-modal h2 {
+        margin:0 0 10px;
+        font-size:25px;
+        color:#fff;
+      }
+
+      .shrii-modal p {
+        margin:8px 0 18px;
+        color:#c3c3c3;
+        line-height:1.65;
+        font-size:14px;
+      }
+
+      .shrii-modal label {
+        display:block;
+        margin:15px 0 7px;
+        text-align:left;
+        color:#f6d85b;
+        font-size:12px;
+        font-weight:700;
+      }
+
+      .shrii-modal select {
+        box-sizing:border-box;
+        width:100%;
+        padding:13px;
+        color:#fff;
+        background:#252525;
+        border:1px solid #484848;
+        border-radius:11px;
+        font-size:14px;
+      }
+
+      .shrii-modal .shrii-primary {
+        display:block;
+        width:100%;
+        margin-top:17px;
+        padding:13px;
+        border:0;
+        border-radius:12px;
+        background:linear-gradient(135deg,#ffe875,#ffc800);
+        color:#171717;
+        font-size:14px;
+        font-weight:800;
+        cursor:pointer;
+      }
+
+      .shrii-modal .shrii-secondary {
+        margin-top:12px;
+        padding:9px 12px;
+        border:1px solid #454545;
+        border-radius:10px;
+        background:transparent;
+        color:#ddd;
+        cursor:pointer;
+      }
+
+      .shrii-modal .shrii-dev-name {
+        color:#ffdc42;
+        font-weight:800;
+        font-size:20px;
+      }
+
+      .shrii-modal .shrii-dev-link {
+        display:inline-block;
+        margin:5px;
+        color:#ffd21c;
+        overflow-wrap:anywhere;
+      }
+
+      @keyframes shriiAppear {
+        from { opacity:0; transform:translateY(7px); }
+        to { opacity:1; transform:translateY(0); }
+      }
+
+      @keyframes shriiBounce {
+        from { transform:translateY(0); opacity:.45; }
+        to { transform:translateY(-4px); opacity:1; }
+      }
+
+      @media(max-width:480px) {
+        #chatbotBox { border-radius:18px !important; }
+        #chatbotBox .shrii-toolbar { padding:9px; }
+        .shrii-modal { padding:23px 18px; }
+        .shrii-modal h2 { font-size:23px; }
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        #chatbotBox .bot-message,
+        #chatbotBox .user-message,
+        .shrii-overlay {
+          animation:none !important;
         }
+      }
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  // ---------------------------------------------------------
+  // TOOLBAR
+  // ---------------------------------------------------------
+
+  let toolbar = box.querySelector(".shrii-toolbar");
+
+  if (!toolbar) {
+    toolbar = document.createElement("div");
+    toolbar.className = "shrii-toolbar";
+    toolbar.innerHTML = `
+      <label for="shriiLanguage">
+        🌐 <span class="shrii-language-label"></span>
+      </label>
+      <select class="shrii-language" id="shriiLanguage"
+              aria-label="Choose chat language">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="hinglish">Hinglish</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+      </select>
+    `;
+    box.insertBefore(toolbar, messages);
+  }
+
+  const languageSelect = toolbar.querySelector("select");
+
+  let footer = box.querySelector(".shrii-footer");
+
+  if (!footer) {
+    footer = document.createElement("div");
+    footer.className = "shrii-footer";
+    footer.innerHTML = `
+      <span class="shrii-footer-label"></span>
+      <strong class="shrii-footer-name"></strong>
+      <button type="button" class="shrii-developer-open"></button>
+    `;
+    box.appendChild(footer);
+  }
+
+  // ---------------------------------------------------------
+  // CHAT MESSAGES
+  // ---------------------------------------------------------
+
+  function addBotMessage(html) {
+    const div = document.createElement("div");
+    div.className = "bot-message";
+    div.innerHTML = html;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function addUserMessage(text) {
+    const div = document.createElement("div");
+    div.className = "user-message";
+    div.textContent = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function botRespond(html, delay = 450) {
+    const typing = document.createElement("div");
+    typing.className = "bot-message shrii-typing";
+    typing.innerHTML = `
+      ${t("typing")}
+      <span class="shrii-dots" aria-hidden="true">
+        <i></i><i></i><i></i>
+      </span>
+    `;
+
+    messages.appendChild(typing);
+    messages.scrollTop = messages.scrollHeight;
+
+    window.setTimeout(() => {
+      typing.remove();
+      addBotMessage(html);
+    }, delay);
+  }
+
+  function updateToolbar() {
+    const label = toolbar.querySelector(".shrii-language-label");
+    if (label) label.textContent = t("choose");
+
+    footer.querySelector(".shrii-footer-label").textContent =
+      t("footer");
+
+    footer.querySelector(".shrii-footer-name").textContent =
+      DEVELOPER;
+
+    footer.querySelector(".shrii-developer-open").textContent =
+      t("developer");
+
+    languageSelect.value = language;
+  }
+
+  // ---------------------------------------------------------
+  // WELCOME POPUP
+  // ---------------------------------------------------------
+
+  function buildWelcomePopup() {
+    if (welcomePopup) welcomePopup.remove();
+
+    welcomePopup = document.createElement("div");
+    welcomePopup.className = "shrii-overlay";
+    welcomePopup.setAttribute("role", "dialog");
+    welcomePopup.setAttribute("aria-modal", "true");
+
+    welcomePopup.innerHTML = `
+      <div class="shrii-modal">
+        <div class="shrii-logo">✦</div>
+        <h2 class="shrii-welcome-title"></h2>
+        <p class="shrii-welcome-text"></p>
+        <label for="shriiWelcomeLanguage"></label>
+        <select id="shriiWelcomeLanguage">
+          <option value="en">🇬🇧 English</option>
+          <option value="hi">🇮🇳 हिन्दी</option>
+          <option value="hinglish">💬 Hinglish</option>
+          <option value="es">🇪🇸 Español</option>
+          <option value="fr">🇫🇷 Français</option>
+        </select>
+        <button type="button" class="shrii-primary"></button>
+        <button type="button" class="shrii-secondary"></button>
+      </div>
+    `;
+
+    document.body.appendChild(welcomePopup);
+
+    const select = welcomePopup.querySelector("select");
+
+    function updateWelcome() {
+      language = select.value;
+      welcomePopup.querySelector(".shrii-welcome-title").textContent =
+        t("welcomeTitle");
+      welcomePopup.querySelector(".shrii-welcome-text").textContent =
+        t("welcome");
+      welcomePopup.querySelector("label").textContent = t("choose");
+      welcomePopup.querySelector(".shrii-primary").textContent =
+        t("start");
+      welcomePopup.querySelector(".shrii-secondary").textContent =
+        t("cancel");
+      updateToolbar();
+    }
+
+    select.addEventListener("change", updateWelcome);
+
+    welcomePopup.querySelector(".shrii-primary").addEventListener(
+      "click",
+      () => {
+        language = select.value;
+        welcomeShown = true;
+        updateToolbar();
+        welcomePopup.remove();
+        welcomePopup = null;
+
+        botRespond(t("greet"), 150);
+        input.focus();
+      }
     );
 
-}
-
-
-/* =========================================================
-   CLOSE CHATBOT
-========================================================= */
-
-if (chatbotClose && chatbotBox) {
-
-    chatbotClose.addEventListener(
-        "click",
-        function(event) {
-
-            event.stopPropagation();
-
-            chatbotBox.classList.remove("active");
-
-        }
+    welcomePopup.querySelector(".shrii-secondary").addEventListener(
+      "click",
+      () => {
+        welcomePopup.remove();
+        welcomePopup = null;
+      }
     );
 
-}
-
-
-/* =========================================================
-   SHrii BOT REPLIES
-========================================================= */
-
-const botReplies = {
-
-    greeting: `
-        <strong>Hey! I'm Shrii ✨</strong><br><br>
-
-        It's lovely to have you here. 😊<br>
-
-        I'm here to help you with anything related to
-        <strong>Priyatam Edits</strong> — whether you'd like
-        to know about pricing, services, portfolio or the
-        editing process.<br><br>
-
-        What would you like to know?
-    `,
-
-
-    pricing: `
-        <strong>Of course 😊 Let me help you with the pricing.</strong>
-        <br><br>
-
-        <strong>Starter — ₹249 / video</strong><br>
-        Clean cuts • Basic captions • Basic sound design •
-        2 revisions
-        <br><br>
-
-        <strong>Creator — ₹1,499 / 3 videos</strong><br>
-        Advanced editing • Captions + Motion • Sound design •
-        Color grading • 3 revisions
-        <br><br>
-
-        <strong>Pro — ₹2,999 / 5 videos</strong><br>
-        Premium editing • Advanced motion graphics •
-        Cinematic color • Sound design • Priority delivery
-        <br><br>
-
-        If you're not sure which package would be best for
-        your content, just tell me what kind of videos you
-        make and I'll guide you. 💛
-    `,
-
-
-    portfolio: `
-        <strong>Absolutely! I'd love to show you the work. 🎬</strong>
-        <br><br>
-
-        You can explore the <strong>Portfolio</strong> section
-        to see Client Projects, Agency Work and AI / Faceless edits.
-        <br><br>
-
-        If you find an editing style you like, feel free to
-        tell me about it. 😊
-    `,
-
-
-    services: `
-        <strong>Sure 😊 Here's what Priyatam Edits offers:</strong>
-        <br><br>
-
-        ✂️ Instagram Reels<br>
-        🎬 YouTube Shorts<br>
-        🎥 YouTube Videos<br>
-        💬 Captions & Subtitles<br>
-        ✨ Motion Graphics<br>
-        🎨 Color Grading<br>
-        🔊 Sound Design
-        <br><br>
-
-        If you already have a particular style in mind,
-        just describe it to me and I'll guide you.
-    `,
-
-
-    process: `
-        <strong>It's quite simple 😊</strong>
-        <br><br>
-
-        <strong>1.</strong> You send your footage.<br>
-        <strong>2.</strong> You tell us your requirements
-        and preferred style.<br>
-        <strong>3.</strong> Editing starts.<br>
-        <strong>4.</strong> A preview is shared with you.<br>
-        <strong>5.</strong> Revisions are made if needed.<br>
-        <strong>6.</strong> The final video is delivered
-        ready to publish.
-        <br><br>
-
-        I'll make sure the process stays simple and
-        comfortable for you. 💛
-    `,
-
-
-    revisions: `
-        <strong>Yes, revisions are available. 😊</strong>
-        <br><br>
-
-        <strong>Starter:</strong> 2 revisions<br>
-        <strong>Creator:</strong> 3 revisions<br>
-        <strong>Pro:</strong> Priority delivery
-        <br><br>
-
-        So if you'd like a few changes after seeing the
-        first version, that's absolutely okay.
-    `,
-
-
-    contact: `
-        <strong>I'd be happy to help you get in touch. 😊</strong>
-        <br><br>
-
-        You can contact Priyatam Edits through:
-        <br><br>
-
-        <a
-            href="https://wa.me/916205706883"
-            target="_blank"
-            rel="noopener"
-            style="color:#ffd21c;"
-        >
-            💬 WhatsApp
-        </a>
-
-        <br><br>
-
-        <a
-            href="mailto:Priyatamkumar84@gmail.com"
-            style="color:#ffd21c;"
-        >
-            📧 Email
-        </a>
-
-        <br><br>
-
-        <a
-            href="https://www.instagram.com/priyatam.cuts/"
-            target="_blank"
-            rel="noopener"
-            style="color:#ffd21c;"
-        >
-            📸 Instagram
-        </a>
-
-        <br><br>
-
-        Just choose whichever option is easiest for you. 💛
-    `,
-
-
-    thanks: `
-        You're very welcome! 😊💛
-        <br><br>
-
-        I'm always happy to help.
-
-        If there's anything else you'd like to know
-        about Priyatam Edits, just ask me.
-    `,
-
-
-    goodbye: `
-        It was lovely chatting with you. 😊
-        <br><br>
-
-        Take care, and whenever you're ready to start
-        your project, I'll be here to help. ✨
-    `
-};
-
-
-/* =========================================================
-   ADD BOT MESSAGE
-========================================================= */
-
-function addBotMessage(message) {
-
-    if (!chatbotMessages) return;
-
-    const div =
-        document.createElement("div");
-
-    div.className =
-        "bot-message";
-
-    div.innerHTML =
-        message;
-
-    chatbotMessages.appendChild(div);
-
-    chatbotMessages.scrollTop =
-        chatbotMessages.scrollHeight;
-}
-
-
-/* =========================================================
-   ADD USER MESSAGE
-========================================================= */
-
-function addUserMessage(message) {
-
-    if (!chatbotMessages) return;
-
-    const div =
-        document.createElement("div");
-
-    div.className =
-        "user-message";
-
-    div.textContent =
-        message;
-
-    chatbotMessages.appendChild(div);
-
-    chatbotMessages.scrollTop =
-        chatbotMessages.scrollHeight;
-}
-
-
-/* =========================================================
-   QUICK BUTTON REPLY
-========================================================= */
-
-window.botReply = function(type) {
-
-    if (!botReplies[type]) return;
-
-    addBotMessage(
-        botReplies[type]
+    updateWelcome();
+  }
+
+  // ---------------------------------------------------------
+  // DEVELOPER POPUP — AG DIGITAL HUB REMOVED
+  // ---------------------------------------------------------
+
+  function showDeveloper() {
+    if (developerPopup) developerPopup.remove();
+
+    developerPopup = document.createElement("div");
+    developerPopup.className = "shrii-overlay";
+    developerPopup.setAttribute("role", "dialog");
+    developerPopup.setAttribute("aria-modal", "true");
+
+    developerPopup.innerHTML = `
+      <div class="shrii-modal">
+        <div class="shrii-logo">✦</div>
+        <h2>${t("devTitle")}</h2>
+        <p>${t("devText")}</p>
+        <div class="shrii-dev-name">${DEVELOPER}</div>
+        <p>Website Developer & Digital Creator</p>
+        <p>
+          <a class="shrii-dev-link"
+             href="mailto:${DEVELOPER_EMAIL}">
+            ✉ Developer Email
+          </a>
+          <br>
+          <a class="shrii-dev-link"
+             href="${DEVELOPER_INSTAGRAM}"
+             target="_blank" rel="noopener noreferrer">
+            📸 Developer Instagram
+          </a>
+        </p>
+        <button type="button" class="shrii-primary shrii-dev-email">
+          Contact Developer
+        </button>
+        <button type="button" class="shrii-secondary shrii-dev-close">
+          ${t("devClose")}
+        </button>
+      </div>
+    `;
+
+    document.body.appendChild(developerPopup);
+
+    developerPopup.querySelector(".shrii-dev-email").addEventListener(
+      "click",
+      () => {
+        window.location.href =
+          "mailto:" + DEVELOPER_EMAIL +
+          "?subject=" +
+          encodeURIComponent("Website enquiry — Priyatam Edits");
+      }
     );
 
-};
-
-
-/* =========================================================
-   TEXT REPLY
-========================================================= */
-
-function getTextReply(message) {
-
-    const text =
-        message.toLowerCase().trim();
-
-
-    /* GREETING */
-
-    if (
-        text === "hi" ||
-        text === "hello" ||
-        text === "hey" ||
-        text === "hii" ||
-        text === "hiii" ||
-        text.includes("good morning") ||
-        text.includes("good afternoon") ||
-        text.includes("good evening") ||
-        text.includes("namaste") ||
-        text.includes("kaise ho")
-    ) {
-
-        return botReplies.greeting;
-
+    function closeDeveloper() {
+      if (developerPopup) {
+        developerPopup.remove();
+        developerPopup = null;
+      }
     }
 
+    developerPopup.querySelector(".shrii-dev-close")
+      .addEventListener("click", closeDeveloper);
 
-    /* THANK YOU */
+    developerPopup.addEventListener("click", event => {
+      if (event.target === developerPopup) closeDeveloper();
+    });
+  }
 
-    if (
-        text.includes("thank you") ||
-        text.includes("thank u") ||
-        text.includes("thanks") ||
-        text.includes("thnx") ||
-        text.includes("dhanyavad")
-    ) {
+  footer.querySelector(".shrii-developer-open")
+    .addEventListener("click", showDeveloper);
 
-        return botReplies.thanks;
+  // ---------------------------------------------------------
+  // PROJECT ENQUIRY FLOW
+  // ---------------------------------------------------------
 
+  function startEnquiry() {
+    enquiry = {
+      step: "type",
+      type: "",
+      quantity: "",
+      deadline: "",
+      budget: ""
+    };
+
+    botRespond(t("enquiry"));
+  }
+
+  function handleEnquiry(answer) {
+    if (!enquiry) return false;
+
+    const normalized = answer.toLowerCase().trim();
+
+    if (["cancel", "stop", "cancel enquiry", "band karo", "रद्द"]
+      .includes(normalized)) {
+      enquiry = null;
+      botRespond(t("cancelEnquiry"));
+      return true;
     }
 
-
-    /* GOODBYE */
-
-    if (
-        text === "bye" ||
-        text.includes("goodbye") ||
-        text.includes("see you") ||
-        text.includes("good night")
-    ) {
-
-        return botReplies.goodbye;
-
+    if (enquiry.step === "type") {
+      enquiry.type = answer;
+      enquiry.step = "quantity";
+      botRespond(t("quantity"));
+      return true;
     }
 
-
-    /* PRICING */
-
-    if (
-        text.includes("price") ||
-        text.includes("pricing") ||
-        text.includes("cost") ||
-        text.includes("rate") ||
-        text.includes("package") ||
-        text.includes("budget") ||
-        text.includes("₹") ||
-        text.includes("kitna") ||
-        text.includes("kitne")
-    ) {
-
-        return botReplies.pricing;
-
+    if (enquiry.step === "quantity") {
+      enquiry.quantity = answer;
+      enquiry.step = "deadline";
+      botRespond(t("deadline"));
+      return true;
     }
 
-
-    /* PORTFOLIO */
-
-    if (
-        text.includes("portfolio") ||
-        text.includes("work") ||
-        text.includes("sample") ||
-        text.includes("samples") ||
-        text.includes("show me") ||
-        text.includes("your work")
-    ) {
-
-        return botReplies.portfolio;
-
+    if (enquiry.step === "deadline") {
+      enquiry.deadline = answer;
+      enquiry.step = "budget";
+      botRespond(t("budget"));
+      return true;
     }
 
+    if (enquiry.step === "budget") {
+      enquiry.budget = answer;
 
-    /* SERVICES */
+      const details = [
+        "Hello Priyatam Edits!",
+        "",
+        "Video type: " + enquiry.type,
+        "Quantity: " + enquiry.quantity,
+        "Deadline: " + enquiry.deadline,
+        "Budget: " + enquiry.budget,
+        "Preferred language: " + languageNames[language],
+        "Please share the final quote and next steps."
+      ].join("\n");
 
-    if (
-        text.includes("service") ||
-        text.includes("services") ||
-        text.includes("editing") ||
-        text.includes("edit") ||
-        text.includes("reel") ||
-        text.includes("short") ||
-        text.includes("youtube") ||
-        text.includes("caption") ||
-        text.includes("subtitle") ||
-        text.includes("motion") ||
-        text.includes("color") ||
-        text.includes("sound")
-    ) {
+      const whatsappURL =
+        "https://wa.me/" + WHATSAPP +
+        "?text=" + encodeURIComponent(details);
 
-        return botReplies.services;
+      enquiry = null;
 
+      botRespond(
+        t("ready") +
+        "<br><br><a class='shrii-project-button' href='" +
+        whatsappURL +
+        "' target='_blank' rel='noopener noreferrer'>" +
+        t("sendWhatsApp") +
+        "</a>"
+      );
+
+      return true;
     }
 
+    return false;
+  }
 
-    /* PROCESS */
+  // ---------------------------------------------------------
+  // SMART KEYWORD REPLIES
+  // ---------------------------------------------------------
 
-    if (
-        text.includes("process") ||
-        text.includes("how") ||
-        text.includes("kaise") ||
-        text.includes("order") ||
-        text.includes("start") ||
-        text.includes("work with you")
-    ) {
-
-        return botReplies.process;
-
-    }
-
-
-    /* REVISIONS */
+  function replyFor(message) {
+    const s = message.toLowerCase().trim();
 
     if (
-        text.includes("revision") ||
-        text.includes("revisions") ||
-        text.includes("change") ||
-        text.includes("changes") ||
-        text.includes("modify") ||
-        text.includes("correction")
-    ) {
-
-        return botReplies.revisions;
-
-    }
-
-
-    /* CONTACT */
+      ["hi", "hello", "hey", "namaste", "namaskar"].includes(s) ||
+      s.includes("good morning") ||
+      s.includes("kaise ho") ||
+      s.includes("नमस्ते")
+    ) return t("greet");
 
     if (
-        text.includes("contact") ||
-        text.includes("whatsapp") ||
-        text.includes("email") ||
-        text.includes("instagram") ||
-        text.includes("talk") ||
-        text.includes("hire") ||
-        text.includes("reach")
+      s.includes("thank") ||
+      s.includes("shukriya") ||
+      s.includes("धन्यवाद")
     ) {
-
-        return botReplies.contact;
-
+      if (language === "hi") {
+        return "आपका स्वागत है! 😊 और कुछ पूछना हो तो बताइए।";
+      }
+      if (language === "hinglish") {
+        return "Welcome! 😊 Aur kuch poochna ho toh batao.";
+      }
+      return "You're welcome! 😊 What else can I help you with?";
     }
 
+    if (
+      s.includes("developer") ||
+      s.includes("who made") ||
+      s.includes("kisne banaya") ||
+      s.includes("ayush") ||
+      s.includes("website kisne")
+    ) {
+      showDeveloper();
+      return null;
+    }
 
-    /* NATURAL DEFAULT */
+    if (
+      s.includes("cancel enquiry") ||
+      s === "cancel" ||
+      s === "stop"
+    ) {
+      enquiry = null;
+      return t("cancelEnquiry");
+    }
 
-    const naturalReplies = [
+    if (
+      s.includes("enquiry") ||
+      s.includes("inquiry") ||
+      s.includes("project") ||
+      s.includes("order") ||
+      s.includes("book") ||
+      s.includes("hire") ||
+      s.includes("करवाना") ||
+      s.includes("edit karwana")
+    ) {
+      startEnquiry();
+      return null;
+    }
 
-        `
-            I understand 😊
-            <br><br>
+    if (
+      s.includes("price") ||
+      s.includes("pricing") ||
+      s.includes("cost") ||
+      s.includes("rate") ||
+      s.includes("package") ||
+      s.includes("budget") ||
+      s.includes("kitna") ||
+      s.includes("kitne") ||
+      s.includes("paisa") ||
+      s.includes("paise") ||
+      s.includes("कीमत") ||
+      s.includes("कितना")
+    ) return t("pricing");
 
-            Could you tell me a little more about what
-            you're looking for? I'll do my best to guide you.
-        `,
+    if (
+      s.includes("portfolio") ||
+      s.includes("sample") ||
+      s.includes("your work") ||
+      s.includes("work dikhao") ||
+      s.includes("काम दिखाओ")
+    ) return t("portfolio");
 
-        `
-            Of course! 😊 I'm happy to help.
-            <br><br>
+    if (
+      s.includes("service") ||
+      s.includes("editing") ||
+      s.includes("edit") ||
+      s.includes("reel") ||
+      s.includes("short") ||
+      s.includes("youtube") ||
+      s.includes("caption") ||
+      s.includes("subtitle") ||
+      s.includes("motion") ||
+      s.includes("color") ||
+      s.includes("sound") ||
+      s.includes("सेवा")
+    ) return t("services");
 
-            You can ask me about
-            <strong>pricing, portfolio, services,
-            process or contact details</strong>.
-        `,
+    if (
+      s.includes("revision") ||
+      s.includes("change") ||
+      s.includes("correction") ||
+      s.includes("रिवीजन")
+    ) return t("revisions");
 
-        `
-            I got you. ✨
-            <br><br>
+    if (
+      s.includes("process") ||
+      s.includes("how to") ||
+      s.includes("kaise") ||
+      s.includes("कैसे")
+    ) return t("process");
 
-            Just tell me what you need help with,
-            and we'll take it from there. 😊
-        `,
+    if (
+      s.includes("contact") ||
+      s.includes("whatsapp") ||
+      s.includes("email") ||
+      s.includes("instagram") ||
+      s.includes("number") ||
+      s.includes("संपर्क")
+    ) return t("contact");
 
-        `
-            Hmm, let me help you with that. 😊
-            <br><br>
+    return t("unknown");
+  }
 
-            I can help with
-            <strong>pricing, portfolio, services,
-            editing process, revisions and contact</strong>.
-        `,
+  // ---------------------------------------------------------
+  // SEND MESSAGE
+  // ---------------------------------------------------------
 
-        `
-            No worries at all. 💛
-            <br><br>
-
-            Tell me a little more about your project
-            and I'll point you in the right direction.
-        `
-    ];
-
-
-    return naturalReplies[
-        Math.floor(
-            Math.random() *
-            naturalReplies.length
-        )
-    ];
-}
-
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-function sendChatMessage() {
-
-    if (!chatbotInput) return;
-
-    const message =
-        chatbotInput.value.trim();
-
+  function sendMessage() {
+    const message = input.value.trim();
     if (!message) return;
 
     addUserMessage(message);
+    input.value = "";
 
-    chatbotInput.value = "";
+    if (handleEnquiry(message)) return;
 
+    const reply = replyFor(message);
+    if (reply) botRespond(reply);
+  }
 
-    /* NATURAL RESPONSE DELAY */
+  if (send) {
+    send.addEventListener("click", event => {
+      event.stopPropagation();
+      sendMessage();
+    });
+  }
 
-    setTimeout(
-        function() {
-
-            addBotMessage(
-                getTextReply(message)
-            );
-
-        },
-        500
-    );
-
-}
-
-
-/* =========================================================
-   SEND BUTTON
-========================================================= */
-
-if (chatbotSend) {
-
-    chatbotSend.addEventListener(
-        "click",
-        function(event) {
-
-            event.stopPropagation();
-
-            sendChatMessage();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   ENTER KEY
-========================================================= */
-
-if (chatbotInput) {
-
-    chatbotInput.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                event.preventDefault();
-
-                sendChatMessage();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   PREVENT CHATBOX FROM CLOSING
-========================================================= */
-
-if (chatbotBox) {
-
-    chatbotBox.addEventListener(
-        "click",
-        function(event) {
-
-            event.stopPropagation();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CLOSE WHEN CLICKING OUTSIDE
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function(event) {
-
-        if (
-            !chatbotBox ||
-            !chatbotBtn
-        ) {
-            return;
-        }
-
-
-        if (
-            !chatbotBox.classList.contains("active")
-        ) {
-            return;
-        }
-
-
-        if (
-            !chatbotBox.contains(event.target) &&
-            !chatbotBtn.contains(event.target)
-        ) {
-
-            chatbotBox.classList.remove(
-                "active"
-            );
-
-        }
-
+  input.addEventListener("keydown", event => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendMessage();
     }
-);
+  });
 
+  // Keep existing quick-reply buttons compatible:
+  // botReply('pricing'), botReply('services'), etc.
+  window.botReply = function(type) {
+    const key = String(type || "").toLowerCase();
 
-/* =========================================================
-   SET CHATBOT NAME = SHrii
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        const chatbotName =
-            document.querySelector(
-                ".chatbot-brand strong"
-            );
-
-        if (chatbotName) {
-
-            chatbotName.textContent =
-                "Shrii";
-
-        }
-
-
-        const chatbotStatus =
-            document.querySelector(
-                ".chatbot-brand small"
-            );
-
-        if (chatbotStatus) {
-
-            chatbotStatus.innerHTML =
-                '<span class="online-dot"></span>Online · Here to help';
-
-        }
-
+    if (key === "enquiry" || key === "project") {
+      startEnquiry();
+      return;
     }
-);
+
+    const validKeys = [
+      "pricing", "services", "portfolio",
+      "process", "revisions", "contact"
+    ];
+
+    if (validKeys.includes(key)) {
+      botRespond(t(key), 200);
+      return;
+    }
+
+    const response = replyFor(key);
+    if (response) botRespond(response, 200);
+  };
+
+  // ---------------------------------------------------------
+  // OPEN / CLOSE — SUPPORTS BOTH CSS CLASS NAMES
+  // ---------------------------------------------------------
+
+  function openChat() {
+    box.classList.add("active");
+    box.classList.add("open");
+
+    if (!welcomeShown) {
+      if (!welcomePopup) buildWelcomePopup();
+    } else {
+      input.focus();
+    }
+  }
+
+  function closeChat() {
+    box.classList.remove("active");
+    box.classList.remove("open");
+  }
+
+  if (btn) {
+    btn.addEventListener("click", event => {
+      event.stopPropagation();
+
+      const isOpen =
+        box.classList.contains("active") ||
+        box.classList.contains("open");
+
+      if (isOpen) {
+        closeChat();
+      } else {
+        openChat();
+      }
+    });
+  }
+
+  if (close) {
+    close.addEventListener("click", event => {
+      event.stopPropagation();
+      closeChat();
+    });
+  }
+
+  document.addEventListener("click", event => {
+    if (
+      !box.contains(event.target) &&
+      btn &&
+      !btn.contains(event.target)
+    ) {
+      closeChat();
+    }
+  });
+
+  // Update existing chatbot heading, if present
+  const brand = box.querySelector(".chatbot-brand strong");
+  const status = box.querySelector(".chatbot-brand small");
+
+  if (brand) brand.textContent = "Shrii";
+
+  if (status) {
+    status.innerHTML =
+      '<span class="online-dot"></span> Online · Multilingual Assistant';
+  }
+
+  updateToolbar();
+
+})();
+
 /* =========================================================
    PRICING 3D MOUSE TILT
 ========================================================= */
