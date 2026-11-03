@@ -1214,8 +1214,7 @@ document
       start: "Start chatting",
       cancel: "Close",
       greet: "Hey! Welcome to Priyatam Edits ✨ I'm Shrii. I can help you with pricing, services, portfolio, revisions and video project enquiries.",
-      pricing: "<strong>Our Editing Packages 💰</strong><br><br><strong>Starter — ₹249 / video</strong><br>Basic cuts, captions, sound design and 2 revisions.<br><br><strong>Creator — ₹1,499 / 3 videos</strong><br>Advanced editing, captions, motion graphics, color grading and 3 revisions.<br><br><strong>Pro — ₹2,999 / 5 videos</strong><br>Premium editing, motion graphics, cinematic color and priority delivery.",
-      services: "<strong>Our Services 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts and videos<br>• Captions and subtitles<br>• Motion graphics<br>• Color grading<br>• Sound design<br>• AI / faceless video editing",
+pricing: "<strong>Our Editing Packages ✨</strong><br><br>Starter — Essential editing for short-form content.<br><br>Creator — Advanced editing with motion and color grading.<br><br>Pro — Premium cinematic editing for brands and creators.<br><br>Contact us for a custom quote.",      services: "<strong>Our Services 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts and videos<br>• Captions and subtitles<br>• Motion graphics<br>• Color grading<br>• Sound design<br>• AI / faceless video editing",
       portfolio: "Visit the Portfolio section on our website to explore our available video samples and editing styles. 🎥",
       process: "<strong>How It Works</strong><br><br>1. Share your video requirements.<br>2. Discuss style, footage and budget.<br>3. Confirm the price and deadline.<br>4. We edit and share a preview.<br>5. Final delivery after agreed revisions. ✅",
       revisions: "Starter includes 2 revisions. Creator includes 3 revisions. Please confirm the revision terms for Pro before starting your project.",
@@ -1244,8 +1243,7 @@ document
       start: "चैट शुरू करें",
       cancel: "बंद करें",
       greet: "नमस्ते! Priyatam Edits में आपका स्वागत है ✨ मैं Shrii हूँ। मैं आपको कीमत, वीडियो एडिटिंग सर्विस, पोर्टफोलियो और प्रोजेक्ट पूछताछ में मदद कर सकती हूँ।",
-      pricing: "<strong>हमारे एडिटिंग पैकेज 💰</strong><br><br><strong>Starter — ₹249 / वीडियो</strong><br>बेसिक कट्स, कैप्शन, साउंड डिजाइन और 2 रिवीजन।<br><br><strong>Creator — ₹1,499 / 3 वीडियो</strong><br>एडवांस एडिटिंग, कैप्शन, मोशन ग्राफिक्स, कलर ग्रेडिंग और 3 रिवीजन।<br><br><strong>Pro — ₹2,999 / 5 वीडियो</strong><br>प्रीमियम एडिटिंग, मोशन ग्राफिक्स, सिनेमैटिक कलर और प्राथमिकता वाली डिलीवरी।",
-      services: "<strong>हमारी सर्विसेज 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts और वीडियो<br>• कैप्शन और सबटाइटल<br>• मोशन ग्राफिक्स<br>• कलर ग्रेडिंग<br>• साउंड डिजाइन<br>• AI / Faceless वीडियो एडिटिंग",
+pricing: "<strong>हमारे एडिटिंग पैकेज ✨</strong><br><br>Starter — जरूरी वीडियो एडिटिंग सुविधाएं।<br><br>Creator — एडवांस एडिटिंग, मोशन और कलर ग्रेडिंग।<br><br>Pro — ब्रांड और क्रिएटर्स के लिए प्रीमियम सिनेमैटिक एडिटिंग।<br><br>कस्टम कोटेशन के लिए हमसे संपर्क करें।",      services: "<strong>हमारी सर्विसेज 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts और वीडियो<br>• कैप्शन और सबटाइटल<br>• मोशन ग्राफिक्स<br>• कलर ग्रेडिंग<br>• साउंड डिजाइन<br>• AI / Faceless वीडियो एडिटिंग",
       portfolio: "हमारी वेबसाइट के Portfolio सेक्शन में जाकर वीडियो सैंपल और एडिटिंग स्टाइल देखें। 🎥",
       process: "<strong>काम करने का तरीका</strong><br><br>1. वीडियो की जरूरत बताएं।<br>2. स्टाइल, फुटेज और बजट पर बात करें।<br>3. कीमत और समय तय करें।<br>4. एडिटिंग और प्रीव्यू मिलेगा।<br>5. तय रिवीजन के बाद फाइनल वीडियो। ✅",
       revisions: "Starter में 2 और Creator में 3 रिवीजन शामिल हैं। Pro के रिवीजन की शर्तें प्रोजेक्ट शुरू करने से पहले कन्फर्म करें।",
@@ -1274,8 +1272,7 @@ document
       start: "Chat start karo",
       cancel: "Close",
       greet: "Hey! Priyatam Edits mein welcome hai ✨ Main Shrii hoon. Pricing, editing services, portfolio, revisions aur project enquiry mein help karungi.",
-      pricing: "<strong>Editing Packages 💰</strong><br><br><strong>Starter — ₹249 / video</strong><br>Basic cuts, captions, sound design aur 2 revisions.<br><br><strong>Creator — ₹1,499 / 3 videos</strong><br>Advanced editing, captions, motion graphics, color grading aur 3 revisions.<br><br><strong>Pro — ₹2,999 / 5 videos</strong><br>Premium editing, cinematic color, motion graphics aur priority delivery.",
-      services: "<strong>Our Services 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts aur videos<br>• Captions & subtitles<br>• Motion graphics<br>• Color grading<br>• Sound design<br>• AI / Faceless editing",
+pricing: "<strong>Our Editing Packages ✨</strong><br><br>Starter — Essential video editing.<br><br>Creator — Advanced editing, motion aur color grading.<br><br>Pro — Premium cinematic editing for brands and creators.<br><br>Custom quote ke liye contact karo.",      services: "<strong>Our Services 🎬</strong><br><br>• Instagram Reels<br>• YouTube Shorts aur videos<br>• Captions & subtitles<br>• Motion graphics<br>• Color grading<br>• Sound design<br>• AI / Faceless editing",
       portfolio: "Website ke Portfolio section mein available samples aur editing styles explore karo. 🎥",
       process: "<strong>Project Process</strong><br><br>1. Video requirements batao.<br>2. Style, footage aur budget discuss karo.<br>3. Price aur deadline confirm karo.<br>4. Editing aur preview milega.<br>5. Agreed revisions ke baad final delivery. ✅",
       revisions: "Starter mein 2 aur Creator mein 3 revisions hain. Pro ke revision terms project start hone se pehle confirm kar lena.",
@@ -2285,66 +2282,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const packages = {
 
-        starter: {
-            name: "Starter",
+    starter: {
+        name: "Starter",
+        description:
+            "Perfect for creators who want clean and engaging short-form content.",
+        price: "CUSTOM QUOTE",
+        unit: "",
+        features: [
+            "1 Reel / Short",
+            "Clean cuts",
+            "Basic captions",
+            "Basic sound design",
+            "2 revisions"
+        ]
+    },
 
-            description:
-                "Perfect for creators who want clean and engaging short-form content.",
+    creator: {
+        name: "Creator",
+        description:
+            "Built for creators who want consistent, polished and engaging content.",
+        price: "CUSTOM QUOTE",
+        unit: "",
+        features: [
+            "Advanced editing",
+            "Captions + motion",
+            "Sound design",
+            "Color grading",
+            "3 revisions"
+        ]
+    },
 
-            price: "₹249",
+    pro: {
+        name: "Pro",
+        description:
+            "For creators and brands who want premium cinematic editing and stronger visual impact.",
+        price: "CUSTOM QUOTE",
+        unit: "",
+        features: [
+            "Premium editing",
+            "Advanced motion graphics",
+            "Cinematic color",
+            "Professional sound design",
+            "Priority delivery"
+        ]
+    }
 
-            unit: "/ video",
-
-            features: [
-                "1 Reel / Short",
-                "Clean cuts",
-                "Basic captions",
-                "Basic sound design",
-                "2 revisions"
-            ]
-        },
-
-
-        creator: {
-            name: "Creator",
-
-            description:
-                "Built for creators who want consistent, polished and engaging content.",
-
-            price: "₹1,499",
-
-            unit: "/ 3 videos",
-
-            features: [
-                "Advanced editing",
-                "Captions + motion",
-                "Sound design",
-                "Color grading",
-                "3 revisions"
-            ]
-        },
-
-
-        pro: {
-            name: "Pro",
-
-            description:
-                "For creators and brands who want premium cinematic editing and stronger visual impact.",
-
-            price: "₹2,999",
-
-            unit: "/ 5 videos",
-
-            features: [
-                "Premium editing",
-                "Advanced motion graphics",
-                "Cinematic color",
-                "Professional sound design",
-                "Priority delivery"
-            ]
-        }
-
-    };
+};
 
 
     /* =====================================================
